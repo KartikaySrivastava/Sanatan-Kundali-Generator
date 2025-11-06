@@ -1,0 +1,941 @@
+{
+    "rashi": [
+      {
+        "rashi_name": "Aries",
+        "sanskrit_name": "Mesh",
+        "element": "Fire",
+        "quality": "Cardinal",
+        "ruling_planet": "Mars",
+        "symbol": "Ram",
+        "description": "Bold, energetic, and action-oriented. Aries natives are natural leaders and initiators.",
+        "key_traits": ["Courageous", "Independent", "Dynamic"],
+        "compatibility": ["Leo", "Sagittarius"],
+        "exaltation_planet": "Sun",
+        "debilitation_planet": "Saturn",
+        "favorable_aspects": ["Energy", "Determination", "Leadership"],
+        "challenging_aspects": ["Impulsiveness", "Aggression"]
+      },
+      {
+        "rashi_name": "Taurus",
+        "sanskrit_name": "Vrishabh",
+        "element": "Earth",
+        "quality": "Fixed",
+        "ruling_planet": "Venus",
+        "symbol": "Bull",
+        "description": "Practical, dependable, and focused on material comfort. Taurus natives value stability and luxury.",
+        "key_traits": ["Patient", "Reliable", "Persistent"],
+        "compatibility": ["Virgo", "Capricorn"],
+        "exaltation_planet": "Moon",
+        "debilitation_planet": "Ketu",
+        "favorable_aspects": ["Stability", "Loyalty", "Pragmatism"],
+        "challenging_aspects": ["Stubbornness", "Overindulgence"]
+      },
+      {
+        "rashi_name": "Gemini",
+        "sanskrit_name": "Mithun",
+        "element": "Air",
+        "quality": "Mutable",
+        "ruling_planet": "Mercury",
+        "symbol": "Twins",
+        "description": "Intellectual, curious, and communicative. Gemini natives are versatile and quick thinkers.",
+        "key_traits": ["Adaptable", "Witty", "Expressive"],
+        "compatibility": ["Libra", "Aquarius"],
+        "exaltation_planet": "Rahu",
+        "debilitation_planet": "Ketu",
+        "favorable_aspects": ["Communication", "Curiosity", "Adaptability"],
+        "challenging_aspects": ["Inconsistency", "Restlessness"]
+      },
+      {
+        "rashi_name": "Cancer",
+        "sanskrit_name": "Karka",
+        "element": "Water",
+        "quality": "Cardinal",
+        "ruling_planet": "Moon",
+        "symbol": "Crab",
+        "description": "Emotional, nurturing, and protective. Cancer natives are deeply connected to family and home.",
+        "key_traits": ["Caring", "Intuitive", "Empathetic"],
+        "compatibility": ["Scorpio", "Pisces"],
+        "exaltation_planet": "Jupiter",
+        "debilitation_planet": "Mars",
+        "favorable_aspects": ["Compassion", "Sensitivity", "Intuition"],
+        "challenging_aspects": ["Moodiness", "Clinginess"]
+      },
+      {
+        "rashi_name": "Leo",
+        "sanskrit_name": "Simha",
+        "element": "Fire",
+        "quality": "Fixed",
+        "ruling_planet": "Sun",
+        "symbol": "Lion",
+        "description": "Confident, charismatic, and ambitious. Leo natives are natural performers and leaders.",
+        "key_traits": ["Generous", "Bold", "Creative"],
+        "compatibility": ["Aries", "Sagittarius"],
+        "exaltation_planet": "Neptune",
+        "debilitation_planet": "Uranus",
+        "favorable_aspects": ["Leadership", "Creativity", "Warmth"],
+        "challenging_aspects": ["Arrogance", "Dominance"]
+      },
+      {
+        "rashi_name": "Virgo",
+        "sanskrit_name": "Kanya",
+        "element": "Earth",
+        "quality": "Mutable",
+        "ruling_planet": "Mercury",
+        "symbol": "Virgin",
+        "description": "Analytical, detail-oriented, and practical. Virgo natives value organization and perfection.",
+        "key_traits": ["Diligent", "Humble", "Logical"],
+        "compatibility": ["Taurus", "Capricorn"],
+        "exaltation_planet": "Mercury",
+        "debilitation_planet": "Venus",
+        "favorable_aspects": ["Precision", "Service", "Practicality"],
+        "challenging_aspects": ["Overcritical", "Perfectionism"]
+      },
+      {
+        "rashi_name": "Libra",
+        "sanskrit_name": "Tula",
+        "element": "Air",
+        "quality": "Cardinal",
+        "ruling_planet": "Venus",
+        "symbol": "Scales",
+        "description": "Balanced, diplomatic, and charming. Libra natives strive for harmony and justice.",
+        "key_traits": ["Charming", "Fair", "Sociable"],
+        "compatibility": ["Gemini", "Aquarius"],
+        "exaltation_planet": "Saturn",
+        "debilitation_planet": "Sun",
+        "favorable_aspects": ["Harmony", "Fairness", "Aesthetics"],
+        "challenging_aspects": ["Indecisiveness", "Superficiality"]
+      },
+      {
+        "rashi_name": "Scorpio",
+        "sanskrit_name": "Vrishchik",
+        "element": "Water",
+        "quality": "Fixed",
+        "ruling_planet": "Mars",
+        "symbol": "Scorpion",
+        "description": "Intense, passionate, and transformative. Scorpio natives are mysterious and determined.",
+        "key_traits": ["Resourceful", "Focused", "Brave"],
+        "compatibility": ["Cancer", "Pisces"],
+        "exaltation_planet": "Ketu",
+        "debilitation_planet": "Moon",
+        "favorable_aspects": ["Resilience", "Intensity", "Mystery"],
+        "challenging_aspects": ["Jealousy", "Possessiveness"]
+      },
+      {
+        "rashi_name": "Sagittarius",
+        "sanskrit_name": "Dhanu",
+        "element": "Fire",
+        "quality": "Mutable",
+        "ruling_planet": "Jupiter",
+        "symbol": "Archer",
+        "description": "Optimistic, adventurous, and philosophical. Sagittarius natives are seekers of knowledge and freedom.",
+        "key_traits": ["Honest", "Adventurous", "Independent"],
+        "compatibility": ["Aries", "Leo"],
+        "exaltation_planet": "Pluto",
+        "debilitation_planet": "Venus",
+        "favorable_aspects": ["Wisdom", "Optimism", "Exploration"],
+        "challenging_aspects": ["Bluntness", "Restlessness"]
+      },
+      {
+        "rashi_name": "Capricorn",
+        "sanskrit_name": "Makar",
+        "element": "Earth",
+        "quality": "Cardinal",
+        "ruling_planet": "Saturn",
+        "symbol": "Goat",
+        "description": "Disciplined, ambitious, and pragmatic. Capricorn natives focus on long-term goals and achievements.",
+        "key_traits": ["Responsible", "Patient", "Determined"],
+        "compatibility": ["Taurus", "Virgo"],
+        "exaltation_planet": "Mars",
+        "debilitation_planet": "Jupiter",
+        "favorable_aspects": ["Persistence", "Structure", "Ambition"],
+        "challenging_aspects": ["Pessimism", "Workaholism"]
+      },
+      {
+        "rashi_name": "Aquarius",
+        "sanskrit_name": "Kumbh",
+        "element": "Air",
+        "quality": "Fixed",
+        "ruling_planet": "Saturn",
+        "symbol": "Water Bearer",
+        "description": "Innovative, humanitarian, and unconventional. Aquarius natives are visionaries and thinkers.",
+        "key_traits": ["Inventive", "Open-minded", "Progressive"],
+        "compatibility": ["Gemini", "Libra"],
+        "exaltation_planet": "Rahu",
+        "debilitation_planet": "Ketu",
+        "favorable_aspects": ["Innovation", "Humanity", "Progress"],
+        "challenging_aspects": ["Detached", "Stubborn"]
+      },
+      {
+        "rashi_name": "Pisces",
+        "sanskrit_name": "Meen",
+        "element": "Water",
+        "quality": "Mutable",
+        "ruling_planet": "Jupiter",
+        "symbol": "Fish",
+        "description": "Compassionate, imaginative, and spiritual. Pisces natives are deeply intuitive and artistic.",
+        "key_traits": ["Empathetic", "Creative", "Gentle"],
+        "compatibility": ["Cancer", "Scorpio"],
+        "exaltation_planet": "Venus",
+        "debilitation_planet": "Mercury",
+        "favorable_aspects": ["Compassion", "Intuition", "Creativity"],
+        "challenging_aspects": ["Escapism", "Over-sensitivity"]
+      }
+    ]
+    ,
+    "planets": [
+      {
+        "planet_name": "Sun",
+        "sanskrit_name": "Surya",
+        "description": "Represents vitality, ego, leadership, and fatherly figures.",
+        "significations": ["Soul", "Leadership", "Authority", "Self-esteem", "Father"],
+        "nature": "Malefic when weak or afflicted; otherwise benefic.",
+        "rulership": ["Leo"],
+        "exaltation": {
+          "rashi": "Aries",
+          "degree": 10
+        },
+        "debilitation": {
+          "rashi": "Libra",
+          "degree": 10
+        },
+        "aspects": ["7th house"],
+        "keywords": ["Vitality", "Ego", "Self-expression"]
+      },
+      {
+        "planet_name": "Moon",
+        "sanskrit_name": "Chandra",
+        "description": "Represents emotions, mind, nurturing, and motherly figures.",
+        "significations": ["Mind", "Emotions", "Mother", "Comforts", "Imagination"],
+        "nature": "Benefic unless afflicted or in a waning phase.",
+        "rulership": ["Cancer"],
+        "exaltation": {
+          "rashi": "Taurus",
+          "degree": 3
+        },
+        "debilitation": {
+          "rashi": "Scorpio",
+          "degree": 3
+        },
+        "aspects": ["7th house"],
+        "keywords": ["Emotions", "Nurturing", "Intuition"]
+      },
+      {
+        "planet_name": "Mars",
+        "sanskrit_name": "Mangal",
+        "description": "Represents courage, energy, aggression, and younger siblings.",
+        "significations": ["Courage", "Action", "Strength", "Passion", "Discipline"],
+        "nature": "Malefic, but provides strength and courage when well-placed.",
+        "rulership": ["Aries", "Scorpio"],
+        "exaltation": {
+          "rashi": "Capricorn",
+          "degree": 28
+        },
+        "debilitation": {
+          "rashi": "Cancer",
+          "degree": 28
+        },
+        "aspects": ["4th house", "7th house", "8th house"],
+        "keywords": ["Energy", "Determination", "Conflict"]
+      },
+      {
+        "planet_name": "Mercury",
+        "sanskrit_name": "Budha",
+        "description": "Represents intelligence, communication, and analytical skills.",
+        "significations": ["Intellect", "Speech", "Business", "Logic", "Learning"],
+        "nature": "Neutral; takes on the nature of planets it is associated with.",
+        "rulership": ["Gemini", "Virgo"],
+        "exaltation": {
+          "rashi": "Virgo",
+          "degree": 15
+        },
+        "debilitation": {
+          "rashi": "Pisces",
+          "degree": 15
+        },
+        "aspects": ["7th house"],
+        "keywords": ["Communication", "Intellect", "Adaptability"]
+      },
+      {
+        "planet_name": "Jupiter",
+        "sanskrit_name": "Guru",
+        "description": "Represents wisdom, knowledge, prosperity, and spirituality.",
+        "significations": ["Wisdom", "Education", "Wealth", "Spirituality", "Children"],
+        "nature": "Natural benefic; provides blessings and protection.",
+        "rulership": ["Sagittarius", "Pisces"],
+        "exaltation": {
+          "rashi": "Cancer",
+          "degree": 5
+        },
+        "debilitation": {
+          "rashi": "Capricorn",
+          "degree": 5
+        },
+        "aspects": ["5th house", "7th house", "9th house"],
+        "keywords": ["Wisdom", "Expansion", "Generosity"]
+      },
+      {
+        "planet_name": "Venus",
+        "sanskrit_name": "Shukra",
+        "description": "Represents love, beauty, luxury, and relationships.",
+        "significations": ["Love", "Creativity", "Luxury", "Arts", "Partnerships"],
+        "nature": "Natural benefic; promotes harmony and creativity.",
+        "rulership": ["Taurus", "Libra"],
+        "exaltation": {
+          "rashi": "Pisces",
+          "degree": 27
+        },
+        "debilitation": {
+          "rashi": "Virgo",
+          "degree": 27
+        },
+        "aspects": ["7th house"],
+        "keywords": ["Harmony", "Romance", "Aesthetics"]
+      },
+      {
+        "planet_name": "Saturn",
+        "sanskrit_name": "Shani",
+        "description": "Represents discipline, hard work, delays, and karma.",
+        "significations": ["Discipline", "Hardship", "Longevity", "Karma", "Patience"],
+        "nature": "Natural malefic; provides long-term benefits through perseverance.",
+        "rulership": ["Capricorn", "Aquarius"],
+        "exaltation": {
+          "rashi": "Libra",
+          "degree": 20
+        },
+        "debilitation": {
+          "rashi": "Aries",
+          "degree": 20
+        },
+        "aspects": ["3rd house", "7th house", "10th house"],
+        "keywords": ["Discipline", "Hard Work", "Persistence"]
+      },
+      {
+        "planet_name": "Rahu",
+        "sanskrit_name": "Rahu",
+        "description": "Represents obsession, material desires, and foreign connections.",
+        "significations": ["Ambition", "Illusion", "Mystery", "Foreign travel", "Sudden events"],
+        "nature": "Natural malefic; creates illusions and material desires.",
+        "rulership": [],
+        "exaltation": {
+          "rashi": "Taurus",
+          "degree": null
+        },
+        "debilitation": {
+          "rashi": "Scorpio",
+          "degree": null
+        },
+        "aspects": ["5th house", "9th house"],
+        "keywords": ["Obsession", "Mystery", "Materialism"]
+      },
+      {
+        "planet_name": "Ketu",
+        "sanskrit_name": "Ketu",
+        "description": "Represents detachment, spirituality, and liberation.",
+        "significations": ["Spirituality", "Detachment", "Moksha", "Intuition", "Occult"],
+        "nature": "Natural malefic; promotes spiritual growth and detachment.",
+        "rulership": [],
+        "exaltation": {
+          "rashi": "Scorpio",
+          "degree": null
+        },
+        "debilitation": {
+          "rashi": "Taurus",
+          "degree": null
+        },
+        "aspects": ["5th house", "9th house"],
+        "keywords": ["Detachment", "Spiritual Growth", "Mysticism"]
+      }
+    ]
+    ,
+    "houses": [
+      {
+        "house_number": 1,
+        "name": "Lagna (Ascendant) / First House",
+        "description": "Represents self, personality, physical appearance, and overall life direction.",
+        "significations": ["Self", "Health", "Personality", "Head"],
+        "nature": "Kendra (center of strength) and Trikona (triangle of purpose). Influences personal growth, vitality, and leadership."
+      },
+      {
+        "house_number": 2,
+        "name": "Dhana Bhava / Second House",
+        "description": "Represents wealth, family, speech, and accumulated assets.",
+        "significations": ["Wealth", "Family", "Speech", "Food habits", "Values"],
+        "nature": "Artha (material prosperity). Governs financial stability, family relations, and value systems."
+      },
+      {
+        "house_number": 3,
+        "name": "Sahaj Bhava / Third House",
+        "description": "Represents courage, communication, younger siblings, and short journeys.",
+        "significations": ["Courage", "Communication", "Siblings", "Efforts"],
+        "nature": "Upachaya (house of growth). Encourages self-expression, boldness, and skills development."
+      },
+      {
+        "house_number": 4,
+        "name": "Sukha Bhava / Fourth House",
+        "description": "Represents home, mother, inner peace, and emotional stability.",
+        "significations": ["Mother", "Home", "Comforts", "Land", "Emotional stability"],
+        "nature": "Kendra (pillar of support). Governs inner contentment, familial bonds, and real estate."
+      },
+      {
+        "house_number": 5,
+        "name": "Putra Bhava / Fifth House",
+        "description": "Represents creativity, children, education, and romance.",
+        "significations": ["Children", "Education", "Romance", "Creativity", "Speculation"],
+        "nature": "Trikona (triangle of purpose). Encourages creativity, intelligence, and joy in life."
+      },
+      {
+        "house_number": 6,
+        "name": "Shatru Bhava / Sixth House",
+        "description": "Represents challenges, enemies, health issues, and debts.",
+        "significations": ["Enemies", "Health", "Debts", "Service", "Competition"],
+        "nature": "Upachaya (house of growth). Challenges to overcome, fostering discipline and resilience."
+      },
+      {
+        "house_number": 7,
+        "name": "Yuvati Bhava / Seventh House",
+        "description": "Represents relationships, marriage, and partnerships.",
+        "significations": ["Marriage", "Partnerships", "Business", "Public image"],
+        "nature": "Kendra (pillar of support). Reflects harmony, alliances, and cooperative ventures."
+      },
+      {
+        "house_number": 8,
+        "name": "Mrityu Bhava / Eighth House",
+        "description": "Represents transformations, longevity, secrets, and occult sciences.",
+        "significations": ["Longevity", "Secrets", "Occult", "Inheritance", "Sudden events"],
+        "nature": "Dusthana (house of hardship). Governs transformation, research, and hidden knowledge."
+      },
+      {
+        "house_number": 9,
+        "name": "Dharma Bhava / Ninth House",
+        "description": "Represents spirituality, higher learning, and luck.",
+        "significations": ["Spirituality", "Religion", "Higher education", "Fortune", "Ethics"],
+        "nature": "Trikona (triangle of purpose). Inspires wisdom, moral values, and divine connection."
+      },
+      {
+        "house_number": 10,
+        "name": "Karma Bhava / Tenth House",
+        "description": "Represents career, reputation, and public image.",
+        "significations": ["Career", "Profession", "Reputation", "Status", "Actions"],
+        "nature": "Kendra (pillar of support) and Upachaya (house of growth). Reflects ambitions, success, and recognition."
+      },
+      {
+        "house_number": 11,
+        "name": "Labha Bhava / Eleventh House",
+        "description": "Represents gains, social circles, and aspirations.",
+        "significations": ["Gains", "Friendships", "Aspirations", "Income", "Fulfillment of desires"],
+        "nature": "Upachaya (house of growth). Governs wealth accumulation, social networks, and goals."
+      },
+      {
+        "house_number": 12,
+        "name": "Vyaya Bhava / Twelfth House",
+        "description": "Represents losses, spirituality, isolation, and foreign connections.",
+        "significations": ["Losses", "Spirituality", "Foreign travel", "Isolation", "Expenses"],
+        "nature": "Dusthana (house of hardship). Reflects detachment, spiritual evolution, and letting go."
+      }
+    ]
+    ,
+    "conjunctions": [
+      {
+        "conjunction": ["Sun", "Moon"],
+        "type": "Benefic",
+        "positive_traits": [
+          "Emotional balance and mental clarity.",
+          "Strong leadership qualities and nurturing ability.",
+          "Vitality and creative expression."
+        ],
+        "negative_traits": [
+          "Overemphasis on ego and emotions.",
+          "Difficulty in separating emotions from decision-making.",
+          "Tendency to seek excessive validation."
+        ]
+      },
+      {
+        "conjunction": ["Sun", "Saturn"],
+        "type": "Malefic",
+        "positive_traits": [
+          "Strong discipline and determination.",
+          "Potential for achieving great success through hard work.",
+          "Increased maturity and responsibility."
+        ],
+        "negative_traits": [
+          "Clashes between ego (Sun) and limitations (Saturn).",
+          "Delays in achieving goals and obstacles in personal growth.",
+          "Tendency towards pessimism and self-doubt."
+        ]
+      },
+      {
+        "conjunction": ["Moon", "Jupiter"],
+        "type": "Benefic",
+        "positive_traits": [
+          "Abundance of wisdom and emotional intelligence.",
+          "Strong nurturing instincts and spiritual growth.",
+          "Optimism and generosity in relationships."
+        ],
+        "negative_traits": [
+          "Overindulgence in comforts and luxury.",
+          "Emotional dependency on others.",
+          "Tendency to overlook practical aspects of life."
+        ]
+      },
+      {
+        "conjunction": ["Mars", "Venus"],
+        "type": "Neutral",
+        "positive_traits": [
+          "Passionate and creative energy.",
+          "Strong drive in relationships and artistic pursuits.",
+          "Balance between action (Mars) and harmony (Venus)."
+        ],
+        "negative_traits": [
+          "Impulsive decisions in love and relationships.",
+          "Overemphasis on physical desires.",
+          "Struggles between assertiveness and compromise."
+        ]
+      },
+      {
+        "conjunction": ["Mars", "Saturn"],
+        "type": "Malefic",
+        "positive_traits": [
+          "Ability to persevere through challenges with determination.",
+          "Strategic thinking and disciplined energy.",
+          "Potential for achieving long-term goals through hard work."
+        ],
+        "negative_traits": [
+          "Conflicts between aggression (Mars) and discipline (Saturn).",
+          "Frustration and delays in action.",
+          "Tendency towards anger and resentment."
+        ]
+      },
+      {
+        "conjunction": ["Jupiter", "Venus"],
+        "type": "Benefic",
+        "positive_traits": [
+          "Artistic and spiritual harmony.",
+          "Attraction to luxury and beauty with wisdom.",
+          "Generosity and an appreciation for finer things in life."
+        ],
+        "negative_traits": [
+          "Tendency to overindulge in pleasures.",
+          "Difficulty in setting boundaries in relationships.",
+          "Overoptimism in financial matters."
+        ]
+      },
+      {
+        "conjunction": ["Rahu", "Moon"],
+        "type": "Malefic",
+        "positive_traits": [
+          "Strong imagination and creative thinking.",
+          "Inclination towards innovation and unconventional ideas.",
+          "Potential for success in fields like technology or mysticism."
+        ],
+        "negative_traits": [
+          "Emotional instability and confusion.",
+          "Tendency to overthink and create unnecessary fears.",
+          "Susceptibility to illusions and addictions."
+        ]
+      },
+      {
+        "conjunction": ["Ketu", "Jupiter"],
+        "type": "Benefic",
+        "positive_traits": [
+          "Deep spiritual insight and connection.",
+          "Wisdom and detachment from material desires.",
+          "Strong potential for philosophical growth."
+        ],
+        "negative_traits": [
+          "Tendency to neglect material responsibilities.",
+          "Overemphasis on spiritual matters at the cost of practicality.",
+          "Difficulty in connecting with others emotionally."
+        ]
+      },
+      {
+        "conjunction": ["Mars", "Ketu"],
+        "type": "Malefic",
+        "positive_traits": [
+          "Fearless attitude and strong action-oriented mindset.",
+          "Great potential in martial arts, defense, or engineering.",
+          "Ability to tackle challenges without hesitation."
+        ],
+        "negative_traits": [
+          "Recklessness and impulsive actions.",
+          "Aggressive tendencies leading to conflicts.",
+          "Difficulty in focusing energy productively."
+        ]
+      },
+      {
+        "conjunction": ["Saturn", "Rahu"],
+        "type": "Malefic",
+        "positive_traits": [
+          "Strong ambition and strategic thinking.",
+          "Potential for success in unconventional careers.",
+          "Resilience in overcoming societal challenges."
+        ],
+        "negative_traits": [
+          "Tendency towards manipulation and unethical practices.",
+          "Obsessive behavior with materialistic goals.",
+          "Emotional detachment and isolation."
+        ]
+      },
+      {
+        "conjunction": ["Jupiter", "Rahu"],
+        "type": "Malefic",
+        "positive_traits": [
+          "Expansion in unconventional areas of knowledge.",
+          "Strong potential for innovative thinking.",
+          "Charisma and ability to attract opportunities."
+        ],
+        "negative_traits": [
+          "Overconfidence and arrogance.",
+          "Tendency towards deception or manipulation.",
+          "Difficulty in distinguishing reality from illusion."
+        ]
+      },
+      {
+        "conjunction": ["Venus", "Saturn"],
+        "type": "Neutral",
+        "positive_traits": [
+          "Practicality in relationships and financial matters.",
+          "Strong commitment and loyalty in partnerships.",
+          "Structured approach to creativity and beauty."
+        ],
+        "negative_traits": [
+          "Emotional coldness and lack of spontaneity.",
+          "Struggles in expressing love and affection.",
+          "Tendency to feel restricted in relationships."
+        ]
+      }
+    ]
+    ,
+    "numerology": {
+      "birth_and_destiny_significance": [
+        {
+          "number": 1,
+          "birth_number_significance": {
+            "description": "The number of leadership, independence, and originality.",
+            "positive_traits": [
+              "Natural leaders with confidence and ambition.",
+              "Innovative and self-reliant.",
+              "Strong willpower and determination."
+            ],
+            "negative_traits": [
+              "Can be egoistic and domineering.",
+              "Impatience and intolerance for others' opinions.",
+              "Difficulty in handling criticism."
+            ]
+          },
+          "destiny_number_significance": {
+            "description": "Destined for leadership and pioneering achievements.",
+            "positive_traits": [
+              "Ability to inspire and motivate others.",
+              "Strong focus on personal goals and ambitions."
+            ],
+            "negative_traits": [
+              "May prioritize personal success over relationships.",
+              "Prone to arrogance and overconfidence."
+            ]
+          }
+        },
+        {
+          "number": 2,
+          "birth_number_significance": {
+            "description": "The number of harmony, cooperation, and sensitivity.",
+            "positive_traits": [
+              "Empathetic and understanding towards others.",
+              "Excellent at mediating and resolving conflicts.",
+              "Highly intuitive and emotionally intelligent."
+            ],
+            "negative_traits": [
+              "Can be overly sensitive and indecisive.",
+              "May become dependent on others for validation.",
+              "Prone to mood swings and emotional insecurities."
+            ]
+          },
+          "destiny_number_significance": {
+            "description": "Destined for partnerships, harmony, and balance in life.",
+            "positive_traits": [
+              "Creates harmony in personal and professional relationships.",
+              "Skilled at collaboration and teamwork."
+            ],
+            "negative_traits": [
+              "May struggle with taking independent decisions.",
+              "Tendency to avoid conflicts at the cost of personal needs."
+            ]
+          }
+        },
+        {
+          "number": 3,
+          "birth_number_significance": {
+            "description": "The number of creativity, communication, and self-expression.",
+            "positive_traits": [
+              "Highly creative with a talent for the arts and expression.",
+              "Optimistic and charismatic personality.",
+              "Strong communication and social skills."
+            ],
+            "negative_traits": [
+              "Can be scattered and unfocused.",
+              "Prone to exaggeration and overindulgence.",
+              "May struggle with following through on plans."
+            ]
+          },
+          "destiny_number_significance": {
+            "description": "Destined to inspire and express through creativity and communication.",
+            "positive_traits": [
+              "Natural ability to uplift and inspire others.",
+              "Success in creative or communication-based professions."
+            ],
+            "negative_traits": [
+              "May face challenges in maintaining discipline.",
+              "Tendency to avoid serious responsibilities."
+            ]
+          }
+        },
+        {
+          "number": 4,
+          "birth_number_significance": {
+            "description": "The number of stability, practicality, and hard work.",
+            "positive_traits": [
+              "Disciplined and hardworking with a methodical approach.",
+              "Dependable and reliable in all areas of life.",
+              "Focused on building strong foundations for the future."
+            ],
+            "negative_traits": [
+              "Can be overly rigid and resistant to change.",
+              "Prone to workaholism and neglecting personal life.",
+              "Tendency to focus excessively on rules and details."
+            ]
+          },
+          "destiny_number_significance": {
+            "description": "Destined to achieve stability and success through discipline and hard work.",
+            "positive_traits": [
+              "Ability to create long-lasting structures and systems.",
+              "Strong focus on achieving tangible results."
+            ],
+            "negative_traits": [
+              "May struggle with adaptability and flexibility.",
+              "Prone to becoming overly conservative or cautious."
+            ]
+          }
+        },
+        {
+          "number": 5,
+          "birth_number_significance": {
+            "description": "The number of freedom, adventure, and versatility.",
+            "positive_traits": [
+              "Dynamic and adaptable to different situations.",
+              "Loves adventure and thrives on change.",
+              "Quick-thinking and resourceful."
+            ],
+            "negative_traits": [
+              "Prone to restlessness and lack of commitment.",
+              "Difficulty in sticking to routines or long-term plans.",
+              "May overindulge in pleasures and distractions."
+            ]
+          },
+          "destiny_number_significance": {
+            "description": "Destined to explore, adapt, and embrace change in life.",
+            "positive_traits": [
+              "Success in fields that require versatility and quick decision-making.",
+              "Ability to bring excitement and innovation to projects."
+            ],
+            "negative_traits": [
+              "May face challenges in achieving stability.",
+              "Tendency to avoid responsibilities or long-term commitments."
+            ]
+          }
+        },
+        {
+          "number": 6,
+          "birth_number_significance": {
+            "description": "The number of love, harmony, and nurturing.",
+            "positive_traits": [
+              "Caring and compassionate towards others.",
+              "Strong focus on family and community.",
+              "Ability to create beauty and harmony in surroundings."
+            ],
+            "negative_traits": [
+              "Can be overly protective or controlling.",
+              "Tendency to sacrifice personal needs for others.",
+              "May struggle with balancing responsibilities."
+            ]
+          },
+          "destiny_number_significance": {
+            "description": "Destined to bring love, harmony, and service to others.",
+            "positive_traits": [
+              "Success in caregiving or creative professions.",
+              "Ability to build nurturing and supportive relationships."
+            ],
+            "negative_traits": [
+              "May face challenges in asserting personal boundaries.",
+              "Prone to taking on too many responsibilities."
+            ]
+          }
+        },
+        {
+          "number": 7,
+          "birth_number_significance": {
+            "description": "The number of spirituality, introspection, and analysis.",
+            "positive_traits": [
+              "Highly intuitive and spiritually inclined.",
+              "Excellent analytical and problem-solving skills.",
+              "Appreciates solitude and deep thinking."
+            ],
+            "negative_traits": [
+              "Can be aloof and emotionally detached.",
+              "Prone to overthinking and skepticism.",
+              "May struggle with practical or material aspects of life."
+            ]
+          },
+          "destiny_number_significance": {
+            "description": "Destined to seek spiritual growth and wisdom through introspection.",
+            "positive_traits": [
+              "Ability to uncover hidden truths and insights.",
+              "Success in intellectual or spiritual pursuits."
+            ],
+            "negative_traits": [
+              "May face challenges in connecting with others emotionally.",
+              "Tendency to become overly isolated or withdrawn."
+            ]
+          }
+        },
+        {
+          "number": 8,
+          "birth_number_significance": {
+            "description": "The number of power, ambition, and material success.",
+            "positive_traits": [
+              "Strong focus on achieving material and financial goals.",
+              "Highly disciplined and organized.",
+              "Ability to lead and manage large-scale projects."
+            ],
+            "negative_traits": [
+              "Can be overly materialistic and power-hungry.",
+              "Prone to stress and workaholism.",
+              "May struggle with emotional expression."
+            ]
+          },
+          "destiny_number_significance": {
+            "description": "Destined to achieve success through hard work and ambition.",
+            "positive_traits": [
+              "Ability to create wealth and material stability.",
+              "Strong leadership and management skills."
+            ],
+            "negative_traits": [
+              "May face challenges with work-life balance.",
+              "Tendency to focus on results at the expense of relationships."
+            ]
+          }
+        },
+        {
+          "number": 9,
+          "birth_number_significance": {
+            "description": "The number of compassion, humanitarianism, and selflessness.",
+            "positive_traits": [
+              "Deeply caring and empathetic towards others.",
+              "Natural inclination towards philanthropy and service.",
+              "Ability to inspire and uplift those around them."
+            ],
+            "negative_traits": [
+              "Can be overly idealistic and impractical.",
+              "Prone to emotional burnout from helping others.",
+              "Difficulty in setting boundaries."
+            ]
+          },
+          "destiny_number_significance": {
+            "description": "Destined to bring compassion and service to the world.",
+            "positive_traits": [
+              "Success in humanitarian or creative fields.",
+              "Ability to bring positive change to society."
+            ],
+            "negative_traits": [
+              "May face challenges in balancing personal needs with service.",
+              "Tendency to take on too much emotional burden."
+            ]
+          }
+        }
+      ]
+      ,
+      "compatibility": [
+        {
+          "number": 1,
+          "friend_numbers": [3, 5, 6],
+          "enemy_numbers": [8],
+          "compatible_numbers": {
+            "friendship": [3, 5, 9],
+            "relationship": [2, 6]
+          }
+        },
+        {
+          "number": 2,
+          "friend_numbers": [4, 6, 8],
+          "enemy_numbers": [1, 9],
+          "compatible_numbers": {
+            "friendship": [4, 6],
+            "relationship": [1, 7]
+          }
+        },
+        {
+          "number": 3,
+          "friend_numbers": [1, 5, 7],
+          "enemy_numbers": [6, 8],
+          "compatible_numbers": {
+            "friendship": [1, 7],
+            "relationship": [5, 9]
+          }
+        },
+        {
+          "number": 4,
+          "friend_numbers": [2, 6, 8],
+          "enemy_numbers": [3, 5],
+          "compatible_numbers": {
+            "friendship": [2, 6],
+            "relationship": [7, 8]
+          }
+        },
+        {
+          "number": 5,
+          "friend_numbers": [1, 3, 9],
+          "enemy_numbers": [4, 8],
+          "compatible_numbers": {
+            "friendship": [3, 9],
+            "relationship": [6, 8]
+          }
+        },
+        {
+          "number": 6,
+          "friend_numbers": [1, 2, 4],
+          "enemy_numbers": [3, 7],
+          "compatible_numbers": {
+            "friendship": [1, 4],
+            "relationship": [5, 9]
+          }
+        },
+        {
+          "number": 7,
+          "friend_numbers": [3, 5, 8],
+          "enemy_numbers": [2, 6],
+          "compatible_numbers": {
+            "friendship": [3, 5],
+            "relationship": [4, 9]
+          }
+        },
+        {
+          "number": 8,
+          "friend_numbers": [2, 4, 7],
+          "enemy_numbers": [1, 5],
+          "compatible_numbers": {
+            "friendship": [2, 4],
+            "relationship": [6, 9]
+          }
+        },
+        {
+          "number": 9,
+          "friend_numbers": [1, 3, 5],
+          "enemy_numbers": [2, 8],
+          "compatible_numbers": {
+            "friendship": [1, 5],
+            "relationship": [3, 6]
+          }
+        }
+      ]
+    }
+  }
+      
+  

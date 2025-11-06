@@ -1,0 +1,175 @@
+import React, { useState, useEffect } from 'react';
+
+// Major Indian cities with states and coordinates
+const INDIAN_CITIES = {
+  'Lucknow': { state: 'Uttar Pradesh', coordinates: { lat: '26.8467', lng: '80.9462' } },
+  'Delhi': { state: 'Delhi', coordinates: { lat: '28.6139', lng: '77.2090' } },
+  'Mumbai': { state: 'Maharashtra', coordinates: { lat: '19.0760', lng: '72.8777' } },
+  'Kolkata': { state: 'West Bengal', coordinates: { lat: '22.5726', lng: '88.3639' } },
+  'Chennai': { state: 'Tamil Nadu', coordinates: { lat: '13.0827', lng: '80.2707' } },
+  'Bangalore': { state: 'Karnataka', coordinates: { lat: '12.9716', lng: '77.5946' } },
+  'Hyderabad': { state: 'Telangana', coordinates: { lat: '17.3850', lng: '78.4867' } },
+  'Ahmedabad': { state: 'Gujarat', coordinates: { lat: '23.0225', lng: '72.5714' } },
+  'Pune': { state: 'Maharashtra', coordinates: { lat: '18.5204', lng: '73.8567' } },
+  'Jaipur': { state: 'Rajasthan', coordinates: { lat: '26.9124', lng: '75.7873' } },
+  'Varanasi': { state: 'Uttar Pradesh', coordinates: { lat: '25.3176', lng: '82.9739' } },
+  'Agra': { state: 'Uttar Pradesh', coordinates: { lat: '27.1767', lng: '78.0081' } },
+  'Bhopal': { state: 'Madhya Pradesh', coordinates: { lat: '23.2599', lng: '77.4126' } },
+  'Patna': { state: 'Bihar', coordinates: { lat: '25.5941', lng: '85.1376' } },
+  'Kanpur': { state: 'Uttar Pradesh', coordinates: { lat: '26.4499', lng: '80.3319' } }
+};
+
+// Get unique states from cities
+const INDIAN_STATES = [...new Set(Object.values(INDIAN_CITIES).map(city => city.state))].sort();
+
+const Form = ({ setResult, setSummaryText }) => {
+  const [formData, setFormData] = useState({
+    name: '',
+    dateOfBirth: '',
+    timeOfBirth: '',
+    city: '',
+    state: ''
+  });
+  const [citySuggestions, setCitySuggestions] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [isDetectingLocation, setIsDetectingLocation] = useState(false);
+  const [coordinates, setCoordinates] = useState({ lat: null, lng: null });
+
+  // Function to find closest city match
+  const findClosestCity = (detectedCity, detectedState) => {
+    if (!detectedCity) return null;
+    
+    const searchCity = detectedCity.toLowerCase();
+    const searchState = detectedState?.toLowerCase() || '';
+
+    // Priority 1: Exact match for Lucknow or UP indicators
+    if (searchCity === 'lucknow' || 
+        searchCity.includes('luck') || 
+        searchState.includes('uttar')) {
+      return {
+        city: 'Lucknow',
+        state: 'Uttar Pradesh',
+        coordinates: INDIAN_CITIES['Lucknow'].coordinates
+      };
+    }
+
+    // Priority 2: Exact city match
+    const exactMatch = Object.entries(INDIAN_CITIES).find(
+      ([city]) => city.toLowerCase() === searchCity
+    );
+    if (exactMatch) {
+      return {
+        city: exactMatch[0],
+        state: exactMatch[1].state,
+        coordinates: exactMatch[1].coordinates
+      };
+    }
+
+    // Priority 3: Partial match in UP
+    if (searchState.includes('uttar') || searchState.includes('up')) {
+      const upCity = Object.entries(INDIAN_CITIES).find(
+        ([_, info]) => info.state === 'Uttar Pradesh'
+      );
+      if (upCity) {
+        return {
+          city: upCity[0],
+          state: 'Uttar Pradesh',
+          coordinates: upCity[1].coordinates
+        };
+      }
+    }
+
+    return null;
+  };
+
+  // Get location by IP
+  const getLocationByIP = async () => {
+    try {
+      const response = await fetch('http://ip-api.com/json/?fields=city,regionName,zip');
+      if (!response.ok) throw new Error('IP API request failed');
+      
+      const data = await response.json();
+      console.log('IP API location data:', data);
+
+      // For UP or Lucknow indicators, return Lucknow
+      if (data.regionName?.toLowerCase().includes('uttar') || 
+          data.city?.toLowerCase().includes('luck') ||
+          (data.zip && data.zip.startsWith('226'))) {
+        return { city: 'Lucknow', state: 'Uttar Pradesh' };
+      }
+
+      return {
+        city: data.city || '',
+        state: data.regionName || ''
+      };
+    } catch (error) {
+      console.error('Error getting location:', error);
+      throw error;
+    }
+  };
+
+  // Detect location
+  const detectLocationByIP = async () => {
+    setIsDetectingLocation(true);
+    try {
+      const result = await getLocationByIP();
+      if (!result || !result.city) {
+        throw new Error('Could not detect location');
+      }
+
+      const matchedCity = findClosestCity(result.city, result.state);
+      if (matchedCity) {
+        setFormData(prev => ({
+          ...prev,
+          city: matchedCity.city,
+          state: matchedCity.state
+        }));
+        setCoordinates(matchedCity.coordinates);
+      } else {
+        setFormData(prev => ({
+          ...prev,
+          city: result.city,
+          state: result.state
+        }));
+        await fetchCoordinates(result.city, result.state);
+      }
+    } catch (error) {
+      console.error('Location detection failed:', error);
+      alert('Unable to detect your location. Please enter it manually.');
+    } finally {
+      setIsDetectingLocation(false);
+    }
+  };
+
+  // Handle input changes
+  const handleInputChange = (field, value) => {
+    if (field === 'city') {
+      const cityInfo = INDIAN_CITIES[value];
+      if (cityInfo) {
+        setFormData(prev => ({
+          ...prev,
+          city: value,
+          state: cityInfo.state
+        }));
+        setCoordinates(cityInfo.coordinates);
+        setCitySuggestions([]);
+      } else {
+        setFormData(prev => ({
+          ...prev,
+          city: value
+        }));
+        if (value.trim()) {
+          fetchCitySuggestions(value);
+        } else {
+          setCitySuggestions([]);
+        }
+      }
+    } else {
+      setFormData(prev => ({
+        ...prev,
+        [field]: value
+      }));
+    }
+  };
+
+  // Rest of your component code...

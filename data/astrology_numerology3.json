@@ -1,0 +1,172 @@
+{
+  "conjunctions": [
+    {
+      "conjunction": ["Sun", "Moon"],
+      "type": "Benefic",
+      "positive_traits": [
+        "Emotional balance and mental clarity.",
+        "Strong leadership qualities and nurturing ability.",
+        "Vitality and creative expression."
+      ],
+      "negative_traits": [
+        "Overemphasis on ego and emotions.",
+        "Difficulty in separating emotions from decision-making.",
+        "Tendency to seek excessive validation."
+      ]
+    },
+    {
+      "conjunction": ["Sun", "Saturn"],
+      "type": "Malefic",
+      "positive_traits": [
+        "Strong discipline and determination.",
+        "Potential for achieving great success through hard work.",
+        "Increased maturity and responsibility."
+      ],
+      "negative_traits": [
+        "Clashes between ego (Sun) and limitations (Saturn).",
+        "Delays in achieving goals and obstacles in personal growth.",
+        "Tendency towards pessimism and self-doubt."
+      ]
+    },
+    {
+      "conjunction": ["Moon", "Jupiter"],
+      "type": "Benefic",
+      "positive_traits": [
+        "Abundance of wisdom and emotional intelligence.",
+        "Strong nurturing instincts and spiritual growth.",
+        "Optimism and generosity in relationships."
+      ],
+      "negative_traits": [
+        "Overindulgence in comforts and luxury.",
+        "Emotional dependency on others.",
+        "Tendency to overlook practical aspects of life."
+      ]
+    },
+    {
+      "conjunction": ["Mars", "Venus"],
+      "type": "Neutral",
+      "positive_traits": [
+        "Passionate and creative energy.",
+        "Strong drive in relationships and artistic pursuits.",
+        "Balance between action (Mars) and harmony (Venus)."
+      ],
+      "negative_traits": [
+        "Impulsive decisions in love and relationships.",
+        "Overemphasis on physical desires.",
+        "Struggles between assertiveness and compromise."
+      ]
+    },
+    {
+      "conjunction": ["Mars", "Saturn"],
+      "type": "Malefic",
+      "positive_traits": [
+        "Ability to persevere through challenges with determination.",
+        "Strategic thinking and disciplined energy.",
+        "Potential for achieving long-term goals through hard work."
+      ],
+      "negative_traits": [
+        "Conflicts between aggression (Mars) and discipline (Saturn).",
+        "Frustration and delays in action.",
+        "Tendency towards anger and resentment."
+      ]
+    },
+    {
+      "conjunction": ["Jupiter", "Venus"],
+      "type": "Benefic",
+      "positive_traits": [
+        "Artistic and spiritual harmony.",
+        "Attraction to luxury and beauty with wisdom.",
+        "Generosity and an appreciation for finer things in life."
+      ],
+      "negative_traits": [
+        "Tendency to overindulge in pleasures.",
+        "Difficulty in setting boundaries in relationships.",
+        "Overoptimism in financial matters."
+      ]
+    },
+    {
+      "conjunction": ["Rahu", "Moon"],
+      "type": "Malefic",
+      "positive_traits": [
+        "Strong imagination and creative thinking.",
+        "Inclination towards innovation and unconventional ideas.",
+        "Potential for success in fields like technology or mysticism."
+      ],
+      "negative_traits": [
+        "Emotional instability and confusion.",
+        "Tendency to overthink and create unnecessary fears.",
+        "Susceptibility to illusions and addictions."
+      ]
+    },
+    {
+      "conjunction": ["Ketu", "Jupiter"],
+      "type": "Benefic",
+      "positive_traits": [
+        "Deep spiritual insight and connection.",
+        "Wisdom and detachment from material desires.",
+        "Strong potential for philosophical growth."
+      ],
+      "negative_traits": [
+        "Tendency to neglect material responsibilities.",
+        "Overemphasis on spiritual matters at the cost of practicality.",
+        "Difficulty in connecting with others emotionally."
+      ]
+    },
+    {
+      "conjunction": ["Mars", "Ketu"],
+      "type": "Malefic",
+      "positive_traits": [
+        "Fearless attitude and strong action-oriented mindset.",
+        "Great potential in martial arts, defense, or engineering.",
+        "Ability to tackle challenges without hesitation."
+      ],
+      "negative_traits": [
+        "Recklessness and impulsive actions.",
+        "Aggressive tendencies leading to conflicts.",
+        "Difficulty in focusing energy productively."
+      ]
+    },
+    {
+      "conjunction": ["Saturn", "Rahu"],
+      "type": "Malefic",
+      "positive_traits": [
+        "Strong ambition and strategic thinking.",
+        "Potential for success in unconventional careers.",
+        "Resilience in overcoming societal challenges."
+      ],
+      "negative_traits": [
+        "Tendency towards manipulation and unethical practices.",
+        "Obsessive behavior with materialistic goals.",
+        "Emotional detachment and isolation."
+      ]
+    },
+    {
+      "conjunction": ["Jupiter", "Rahu"],
+      "type": "Malefic",
+      "positive_traits": [
+        "Expansion in unconventional areas of knowledge.",
+        "Strong potential for innovative thinking.",
+        "Charisma and ability to attract opportunities."
+      ],
+      "negative_traits": [
+        "Overconfidence and arrogance.",
+        "Tendency towards deception or manipulation.",
+        "Difficulty in distinguishing reality from illusion."
+      ]
+    },
+    {
+      "conjunction": ["Venus", "Saturn"],
+      "type": "Neutral",
+      "positive_traits": [
+        "Practicality in relationships and financial matters.",
+        "Strong commitment and loyalty in partnerships.",
+        "Structured approach to creativity and beauty."
+      ],
+      "negative_traits": [
+        "Emotional coldness and lack of spontaneity.",
+        "Struggles in expressing love and affection.",
+        "Tendency to feel restricted in relationships."
+      ]
+    }
+  ]
+}

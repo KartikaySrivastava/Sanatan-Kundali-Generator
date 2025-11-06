@@ -1,0 +1,88 @@
+{
+  "houses": [
+    {
+      "house_number": 1,
+      "name": "Lagna (Ascendant) / First House",
+      "description": "Represents self, personality, physical appearance, and overall life direction.",
+      "significations": ["Self", "Health", "Personality", "Head"],
+      "nature": "Kendra (center of strength) and Trikona (triangle of purpose). Influences personal growth, vitality, and leadership."
+    },
+    {
+      "house_number": 2,
+      "name": "Dhana Bhava / Second House",
+      "description": "Represents wealth, family, speech, and accumulated assets.",
+      "significations": ["Wealth", "Family", "Speech", "Food habits", "Values"],
+      "nature": "Artha (material prosperity). Governs financial stability, family relations, and value systems."
+    },
+    {
+      "house_number": 3,
+      "name": "Sahaj Bhava / Third House",
+      "description": "Represents courage, communication, younger siblings, and short journeys.",
+      "significations": ["Courage", "Communication", "Siblings", "Efforts"],
+      "nature": "Upachaya (house of growth). Encourages self-expression, boldness, and skills development."
+    },
+    {
+      "house_number": 4,
+      "name": "Sukha Bhava / Fourth House",
+      "description": "Represents home, mother, inner peace, and emotional stability.",
+      "significations": ["Mother", "Home", "Comforts", "Land", "Emotional stability"],
+      "nature": "Kendra (pillar of support). Governs inner contentment, familial bonds, and real estate."
+    },
+    {
+      "house_number": 5,
+      "name": "Putra Bhava / Fifth House",
+      "description": "Represents creativity, children, education, and romance.",
+      "significations": ["Children", "Education", "Romance", "Creativity", "Speculation"],
+      "nature": "Trikona (triangle of purpose). Encourages creativity, intelligence, and joy in life."
+    },
+    {
+      "house_number": 6,
+      "name": "Shatru Bhava / Sixth House",
+      "description": "Represents challenges, enemies, health issues, and debts.",
+      "significations": ["Enemies", "Health", "Debts", "Service", "Competition"],
+      "nature": "Upachaya (house of growth). Challenges to overcome, fostering discipline and resilience."
+    },
+    {
+      "house_number": 7,
+      "name": "Yuvati Bhava / Seventh House",
+      "description": "Represents relationships, marriage, and partnerships.",
+      "significations": ["Marriage", "Partnerships", "Business", "Public image"],
+      "nature": "Kendra (pillar of support). Reflects harmony, alliances, and cooperative ventures."
+    },
+    {
+      "house_number": 8,
+      "name": "Mrityu Bhava / Eighth House",
+      "description": "Represents transformations, longevity, secrets, and occult sciences.",
+      "significations": ["Longevity", "Secrets", "Occult", "Inheritance", "Sudden events"],
+      "nature": "Dusthana (house of hardship). Governs transformation, research, and hidden knowledge."
+    },
+    {
+      "house_number": 9,
+      "name": "Dharma Bhava / Ninth House",
+      "description": "Represents spirituality, higher learning, and luck.",
+      "significations": ["Spirituality", "Religion", "Higher education", "Fortune", "Ethics"],
+      "nature": "Trikona (triangle of purpose). Inspires wisdom, moral values, and divine connection."
+    },
+    {
+      "house_number": 10,
+      "name": "Karma Bhava / Tenth House",
+      "description": "Represents career, reputation, and public image.",
+      "significations": ["Career", "Profession", "Reputation", "Status", "Actions"],
+      "nature": "Kendra (pillar of support) and Upachaya (house of growth). Reflects ambitions, success, and recognition."
+    },
+    {
+      "house_number": 11,
+      "name": "Labha Bhava / Eleventh House",
+      "description": "Represents gains, social circles, and aspirations.",
+      "significations": ["Gains", "Friendships", "Aspirations", "Income", "Fulfillment of desires"],
+      "nature": "Upachaya (house of growth). Governs wealth accumulation, social networks, and goals."
+    },
+    {
+      "house_number": 12,
+      "name": "Vyaya Bhava / Twelfth House",
+      "description": "Represents losses, spirituality, isolation, and foreign connections.",
+      "significations": ["Losses", "Spirituality", "Foreign travel", "Isolation", "Expenses"],
+      "nature": "Dusthana (house of hardship). Reflects detachment, spiritual evolution, and letting go."
+    }
+  ]
+}
