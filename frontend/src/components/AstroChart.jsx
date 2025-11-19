@@ -56,18 +56,18 @@ const AstroChart = ({ result, summaryText }) => {
   });
 
   const houseCoordinates = {
-    1: { x: "50%", y: "25%" },
-    2: { x: "27%", y: "16%" },
-    3: { x: "16%", y: "25%" },
-    4: { x: "27%", y: "50%" },
-    5: { x: "10%", y: "72%" },
-    6: { x: "27%", y: "85%" },
-    7: { x: "50%", y: "70%" },
-    8: { x: "72%", y: "85%" },
-    9: { x: "85%", y: "72%" },
-    10: { x: "72%", y: "50%" },
-    11: { x: "85%", y: "25%" },
-    12: { x: "72%", y: "16%" },
+    1: { x: "100", y: "50" },
+    2: { x: "54", y: "32" },
+    3: { x: "32", y: "50" },
+    4: { x: "54", y: "100" },
+    5: { x: "20", y: "144" },
+    6: { x: "54", y: "170" },
+    7: { x: "100", y: "140" },
+    8: { x: "144", y: "170" },
+    9: { x: "170", y: "144" },
+    10: { x: "144", y: "100" },
+    11: { x: "170", y: "50" },
+    12: { x: "144", y: "32" },
   };
 
   // Generate comprehensive astrological data tables
@@ -142,27 +142,27 @@ const AstroChart = ({ result, summaryText }) => {
     <div className="w-full">
       {/* Chart Container - Centered and Large */}
       <div className="flex justify-center mb-8">
-        <div className="w-full max-w-2xl bg-white rounded-xl shadow-xl p-6 border-2 border-blue-200">
-          <div className="flex flex-col lg:flex-row gap-6 justify-center">
+        <div className="w-full max-w-5xl bg-white rounded-xl shadow-xl p-8 border-2 border-blue-200">
+          <div className="flex flex-col lg:flex-row gap-8 justify-center">
             {/* Lagna Chart (D1) */}
             <div className="flex-1">
-              <div className="text-center mb-2">
-                <h3 className="text-lg font-bold text-gray-800">Lagna Chart (D1)</h3>
+              <div className="text-center mb-4">
+                <h3 className="text-xl font-bold text-gray-800">Lagna Chart (D1)</h3>
               </div>
               <svg 
-                viewBox="0 0 100 100" 
-                className="w-full h-auto max-w-md mx-auto" 
+                viewBox="0 0 200 200" 
+                className="w-full h-auto max-w-lg mx-auto" 
                 style={{ aspectRatio: "1" }}
               >
                 {/* Outer Square */}
-                <rect x="5" y="5" width="90" height="90" fill="none" stroke="#2C3E50" strokeWidth="0.8" />
+                <rect x="10" y="10" width="180" height="180" fill="none" stroke="#2C3E50" strokeWidth="2" />
                 
                 {/* Diamond Inside */}
-                <polygon points="50,5 95,50 50,95 5,50" fill="none" stroke="#2C3E50" strokeWidth="0.8" />
+                <polygon points="100,10 190,100 100,190 10,100" fill="none" stroke="#2C3E50" strokeWidth="2" />
                 
                 {/* Rotated Cross */}
-                <line x1="5" y1="5" x2="95" y2="95" stroke="#2C3E50" strokeWidth="0.6" />
-                <line x1="5" y1="95" x2="95" y2="5" stroke="#2C3E50" strokeWidth="0.6" />
+                <line x1="10" y1="10" x2="190" y2="190" stroke="#2C3E50" strokeWidth="1.5" />
+                <line x1="10" y1="190" x2="190" y2="10" stroke="#2C3E50" strokeWidth="1.5" />
 
                 {/* House Numbers, Rashi Names, and Planet Data */}
                 {Object.entries(houseCoordinates).map(([house, { x, y }]) => (
@@ -170,9 +170,9 @@ const AstroChart = ({ result, summaryText }) => {
                     {/* House Number */}
                     <text
                       x={x}
-                      y={parseFloat(y) - 8 + "%"}
+                      y={parseFloat(y) - 16}
                       textAnchor="middle"
-                      fontSize="3"
+                      fontSize="8"
                       fill="#2C3E50"
                       fontWeight="bold"
                     >
@@ -182,9 +182,9 @@ const AstroChart = ({ result, summaryText }) => {
                     {/* Rashi Name with fallback */}
                     <text
                       x={x}
-                      y={parseFloat(y) - 4 + "%"}
+                      y={parseFloat(y) - 8}
                       textAnchor="middle"
-                      fontSize="2.5"
+                      fontSize="6"
                       fill="#2980B9"
                       fontWeight="600"
                     >
@@ -195,7 +195,7 @@ const AstroChart = ({ result, summaryText }) => {
                     {planetHouseMapping[house]?.map((planet, index) => {
                       const planetCode = planetCodes[planet] || planet.substring(0, 2);
                       const planetData = planetDegrees[planet];
-                      const planetY = parseFloat(y) + (index * 6) + "%";
+                      const planetY = parseFloat(y) + (index * 12) + 8;
                       
                       return (
                         <text
@@ -203,13 +203,13 @@ const AstroChart = ({ result, summaryText }) => {
                           x={x}
                           y={planetY}
                           textAnchor="middle"
-                          fontSize="3.5"
+                          fontSize="8"
                           fill={planetColors[planetCode] || '#2C3E50'}
                           fontWeight="bold"
                         >
                           {planetCode}
                           {planetData && planetData.degrees && (
-                            <tspan fontSize="2" fontWeight="normal" fill="#555">
+                            <tspan fontSize="5" fontWeight="normal" fill="#555">
                               {typeof planetData.degrees === 'number' ? planetData.degrees.toFixed(1) : planetData.degrees}°
                             </tspan>
                           )}
@@ -223,23 +223,23 @@ const AstroChart = ({ result, summaryText }) => {
 
             {/* Navamsa Chart (D9) */}
             <div className="flex-1">
-              <div className="text-center mb-2">
-                <h3 className="text-lg font-bold text-gray-800">Navamsa (D9)</h3>
+              <div className="text-center mb-4">
+                <h3 className="text-xl font-bold text-gray-800">Navamsa (D9)</h3>
               </div>
               <svg 
-                viewBox="0 0 100 100" 
-                className="w-full h-auto max-w-md mx-auto"
+                viewBox="0 0 200 200" 
+                className="w-full h-auto max-w-lg mx-auto"
                 style={{ aspectRatio: "1" }}
               >
                 {/* Outer Square */}
-                <rect x="5" y="5" width="90" height="90" fill="none" stroke="#8B4513" strokeWidth="0.8" />
+                <rect x="10" y="10" width="180" height="180" fill="none" stroke="#8B4513" strokeWidth="2" />
                 
                 {/* Diamond Inside */}
-                <polygon points="50,5 95,50 50,95 5,50" fill="none" stroke="#8B4513" strokeWidth="0.8" />
+                <polygon points="100,10 190,100 100,190 10,100" fill="none" stroke="#8B4513" strokeWidth="2" />
                 
                 {/* Rotated Cross */}
-                <line x1="5" y1="5" x2="95" y2="95" stroke="#8B4513" strokeWidth="0.6" />
-                <line x1="5" y1="95" x2="95" y2="5" stroke="#8B4513" strokeWidth="0.6" />
+                <line x1="10" y1="10" x2="190" y2="190" stroke="#8B4513" strokeWidth="1.5" />
+                <line x1="10" y1="190" x2="190" y2="10" stroke="#8B4513" strokeWidth="1.5" />
 
                 {/* Display Navamsa data if available */}
                 {Object.entries(houseCoordinates).map(([house, { x, y }]) => {
@@ -249,9 +249,9 @@ const AstroChart = ({ result, summaryText }) => {
                       {/* House Number */}
                       <text
                         x={x}
-                        y={parseFloat(y) - 6 + "%"}
+                        y={parseFloat(y) - 16}
                         textAnchor="middle"
-                        fontSize="2.8"
+                        fontSize="8"
                         fill="#8B4513"
                         fontWeight="bold"
                       >
@@ -261,9 +261,9 @@ const AstroChart = ({ result, summaryText }) => {
                       {/* Navamsa Rashi */}
                       <text
                         x={x}
-                        y={parseFloat(y) - 2 + "%"}
+                        y={parseFloat(y) - 8}
                         textAnchor="middle"
-                        fontSize="2.2"
+                        fontSize="6"
                         fill="#A0522D"
                         fontWeight="600"
                       >
