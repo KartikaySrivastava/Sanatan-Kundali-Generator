@@ -323,7 +323,18 @@ export const translations = {
     'Sagittarius': 'धनु',
     'Capricorn': 'मकर',
     'Aquarius': 'कुम्भ',
-    'Pisces': 'मीन'
+    'Pisces': 'मीन',
+
+    // Strength Indicators
+    'Strength Indicators': 'बल संकेतक',
+    'Exaltation:': 'उच्च:',
+    'Peak strength - Maximum positive influence': 'उच्चतम शक्ति - सर्वाधिक सकारात्मक प्रभाव',
+    'Moolatrikona:': 'मूल त्रिकोण:',
+    'Own sign - Strong natural position': 'स्व राशि - प्राकृतिक रूप से मजबूत स्थिति',
+    'Swakshetra:': 'स्वक्षेत्र:',
+    'Own house - Good strength': 'स्व भाव - अच्छी शक्ति',
+    'Neecha:': 'नीच:',
+    'Debilitated - Weak position': 'दुर्बल - कमजोर स्थिति'
   }
 };
 
