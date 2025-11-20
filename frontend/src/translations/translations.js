@@ -160,7 +160,25 @@ export const translations = {
     'Sagittarius': 'Sagittarius',
     'Capricorn': 'Capricorn',
     'Aquarius': 'Aquarius',
-    'Pisces': 'Pisces'
+    'Pisces': 'Pisces',
+
+    // Chart Rashi Names
+    'chart': {
+      'rashi': {
+        'mesha': 'Aries',
+        'vrishabha': 'Taurus',
+        'mithuna': 'Gemini',
+        'karka': 'Cancer',
+        'simha': 'Leo',
+        'kanya': 'Virgo',
+        'tula': 'Libra',
+        'vrishchika': 'Scorpio',
+        'dhanu': 'Sagittarius',
+        'makara': 'Capricorn',
+        'kumbha': 'Aquarius',
+        'meena': 'Pisces'
+      }
+    }
   },
   
   hi: {
@@ -325,6 +343,24 @@ export const translations = {
     'Aquarius': 'कुम्भ',
     'Pisces': 'मीन',
 
+    // Chart Rashi Names
+    'chart': {
+      'rashi': {
+        'karka': 'कर्क',
+        'simha': 'सिंह',
+        'kanya': 'कन्या',
+        'tula': 'तुला',
+        'vrishchika': 'वृश्चिक',
+        'dhanu': 'धनु',
+        'makara': 'मकर',
+        'kumbha': 'कुंभ',
+        'meena': 'मीन',
+        'mesha': 'मेष',
+        'vrishabha': 'वृषभ',
+        'mithuna': 'मिथुन'
+      }
+    },
+
     // Strength Indicators
     'Strength Indicators': 'बल संकेतक',
     'Exaltation:': 'उच्च:',
@@ -341,15 +377,32 @@ export const translations = {
 // Function to get translated text
 export const getTranslation = (text, language = 'en') => {
   if (!text) return '';
-  
+
   // Clean the text by removing extra spaces
   const cleanText = text.trim();
-  
+
+  // Handle nested keys with dot notation (e.g., "chart.rashi.karka")
+  if (cleanText.includes('.')) {
+    const keys = cleanText.split('.');
+    let value = translations[language];
+    for (const key of keys) {
+      if (value && typeof value === 'object' && key in value) {
+        value = value[key];
+      } else {
+        value = undefined;
+        break;
+      }
+    }
+    if (value !== undefined) {
+      return value;
+    }
+  }
+
   // Direct translation (exact match)
   if (translations[language] && translations[language][cleanText]) {
     return translations[language][cleanText];
   }
-  
+
   // Try case-insensitive matching
   const translationsForLang = translations[language] || {};
   for (const [key, value] of Object.entries(translationsForLang)) {

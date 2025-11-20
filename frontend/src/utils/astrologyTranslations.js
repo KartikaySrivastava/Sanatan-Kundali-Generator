@@ -1,38 +1,64 @@
 // Centralized Rashi translation utility
 export const translateRashi = (rashiName, language = 'en') => {
   if (!rashiName) return 'Unknown';
-  
-  // Comprehensive Rashi mapping for both directions
+
+  // Comprehensive Rashi mapping
   const rashiMap = {
-    // English to Hindi
-    'aries': 'मेष',
-    'taurus': 'वृषभ',
-    'gemini': 'मिथुन',
-    'cancer': 'कर्क',
-    'leo': 'सिंह',
-    'virgo': 'कन्या',
-    'libra': 'तुला',
-    'scorpio': 'वृश्चिक',
-    'sagittarius': 'धनु',
-    'capricorn': 'मकर',
-    'aquarius': 'कुम्भ',
-    'pisces': 'मीन',
+    // Sanskrit names from backend to English
+    'Mesha': 'Aries',
+    'Vrishabha': 'Taurus',
+    'Mithuna': 'Gemini',
+    'Karka': 'Cancer',
+    'Simha': 'Leo',
+    'Kanya': 'Virgo',
+    'Tula': 'Libra',
+    'Vrishchika': 'Scorpio',
+    'Dhanu': 'Sagittarius',
+    'Makara': 'Capricorn',
+    'Kumbha': 'Aquarius',
+    'Meena': 'Pisces',
 
-    // Proper case English to Hindi
-    'Aries': 'मेष',
-    'Taurus': 'वृषभ',
-    'Gemini': 'मिथुन',
-    'Cancer': 'कर्क',
-    'Leo': 'सिंह',
-    'Virgo': 'कन्या',
-    'Libra': 'तुला',
-    'Scorpio': 'वृश्चिक',
-    'Sagittarius': 'धनु',
-    'Capricorn': 'मकर',
-    'Aquarius': 'कुम्भ',
-    'Pisces': 'मीन',
+    // English names (already English)
+    'Aries': 'Aries',
+    'Taurus': 'Taurus',
+    'Gemini': 'Gemini',
+    'Cancer': 'Cancer',
+    'Leo': 'Leo',
+    'Virgo': 'Virgo',
+    'Libra': 'Libra',
+    'Scorpio': 'Scorpio',
+    'Sagittarius': 'Sagittarius',
+    'Capricorn': 'Capricorn',
+    'Aquarius': 'Aquarius',
+    'Pisces': 'Pisces',
 
-    // Sanskrit names from backend to Hindi
+    // Lowercase English to English
+    'aries': 'Aries',
+    'taurus': 'Taurus',
+    'gemini': 'Gemini',
+    'cancer': 'Cancer',
+    'leo': 'Leo',
+    'virgo': 'Virgo',
+    'libra': 'Libra',
+    'scorpio': 'Scorpio',
+    'sagittarius': 'Sagittarius',
+    'capricorn': 'Capricorn',
+    'aquarius': 'Aquarius',
+    'pisces': 'Pisces',
+
+    // Special cases
+    'unknown': 'Unknown',
+    'Unknown': 'Unknown',
+    'unknown sign': 'Unknown'
+  };
+
+  // For English, return English name
+  if (language === 'en') {
+    return rashiMap[rashiName] || rashiName;
+  }
+
+  // For Hindi, use the Hindi translations
+  const hindiMap = {
     'Mesha': 'मेष',
     'Vrishabha': 'वृषभ',
     'Mithuna': 'मिथुन',
@@ -45,19 +71,28 @@ export const translateRashi = (rashiName, language = 'en') => {
     'Makara': 'मकर',
     'Kumbha': 'कुम्भ',
     'Meena': 'मीन',
-
-    // Special cases
+    'Aries': 'मेष',
+    'Taurus': 'वृषभ',
+    'Gemini': 'मिथुन',
+    'Cancer': 'कर्क',
+    'Leo': 'सिंह',
+    'Virgo': 'कन्या',
+    'Libra': 'तुला',
+    'Scorpio': 'वृश्चिक',
+    'Sagittarius': 'धनु',
+    'Capricorn': 'मकर',
+    'Aquarius': 'कुम्भ',
+    'Pisces': 'मीन',
     'unknown': 'अज्ञात',
-    'Unknown': 'Unknown',
+    'Unknown': 'अज्ञात',
     'unknown sign': 'अज्ञात राशि'
   };
-  
-  // If Hindi mode and we have a translation, return Hindi version
-  if (language === 'hi' && rashiMap[rashiName]) {
-    return rashiMap[rashiName];
+
+  if (language === 'hi') {
+    return hindiMap[rashiName] || rashiName;
   }
-  
-  // Otherwise return original
+
+  // Default fallback
   return rashiName;
 };
 

@@ -8,8 +8,27 @@ import LanguageToggle from "./LanguageToggle";
 
 const AstroChart = ({ result, summaryText }) => {
   const { language, isHindi } = useLanguage();
-  
+
   if (!result) return null;
+
+  // Helper function to map backend rashi names to translation keys
+  const getRashiKey = (rashiName) => {
+    const rashiMap = {
+      'Mesha': 'mesha',
+      'Vrishabha': 'vrishabha',
+      'Mithuna': 'mithuna',
+      'Karka': 'karka',
+      'Simha': 'simha',
+      'Kanya': 'kanya',
+      'Tula': 'tula',
+      'Vrishchika': 'vrishchika',
+      'Dhanu': 'dhanu',
+      'Makara': 'makara',
+      'Kumbha': 'kumbha',
+      'Meena': 'meena'
+    };
+    return rashiMap[rashiName] || rashiName.toLowerCase();
+  };
 
   // Safe data extraction with fallbacks
   const houseRashis = result.house_rashis || {};
@@ -393,7 +412,7 @@ const AstroChart = ({ result, summaryText }) => {
                       fill="#2980B9"
                       fontWeight="600"
                     >
-                      {translateRashi(houseRashis[house] || 'Unknown')}
+                      {translate(`chart.rashi.${getRashiKey(houseRashis[house])}`, language)}
                     </text>
 
                     {/* Planet Names with degrees */}
@@ -448,7 +467,6 @@ const AstroChart = ({ result, summaryText }) => {
 
                 {/* Display Navamsa data if available */}
                 {Object.entries(houseCoordinates).map(([house, { x, y }]) => {
-                  const navamsaRashi = translateRashi(result.navamsa_houses?.[house] || houseRashis[house] || 'Unknown');
                   return (
                     <g key={`navamsa-${house}`}>
                       {/* House Number */}
@@ -472,7 +490,7 @@ const AstroChart = ({ result, summaryText }) => {
                         fill="#A0522D"
                         fontWeight="600"
                       >
-                        {navamsaRashi}
+                        {translate(`chart.rashi.${getRashiKey(result.navamsa_houses?.[house] || houseRashis[house])}`, language)}
                       </text>
                     </g>
                   );
