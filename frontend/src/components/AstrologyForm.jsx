@@ -1,6 +1,10 @@
 import React, { useState } from "react";
+import { useLanguage } from "../contexts/LanguageContext";
+import { translate } from "../translations/translations";
+import LanguageToggle from "./LanguageToggle";
 
 const AstrologyForm = ({ setResult, setSummaryText }) => {
+  const { language } = useLanguage();
   const [name, setName] = useState("");
   const [dob, setDob] = useState("");
   const [tob, setTob] = useState("");
@@ -138,12 +142,15 @@ const AstrologyForm = ({ setResult, setSummaryText }) => {
 
   return (
     <div className="w-full max-w-lg mx-auto mt-10 p-6 bg-white shadow-md rounded-lg">
-      <h2 className="text-2xl font-bold text-center text-teal-700 mb-4">
-        🔮 Astrology Form
-      </h2>
+      <div className="flex justify-between items-center mb-4">
+        <h2 className="text-2xl font-bold text-teal-700">
+          {translate('🔮 Astrology Form', language)}
+        </h2>
+        <LanguageToggle />
+      </div>
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
-          <label className="block font-semibold mb-1">Name 📝:</label>
+          <label className="block font-semibold mb-1">{translate('Name 📝:', language)}</label>
           <input
             type="text"
             value={name}
@@ -154,7 +161,7 @@ const AstrologyForm = ({ setResult, setSummaryText }) => {
         </div>
 
         <div>
-          <label className="block font-semibold mb-1">Date of Birth 📅:</label>
+          <label className="block font-semibold mb-1">{translate('Date of Birth 📅:', language)}</label>
           <input
             type="date"
             value={dob}
@@ -166,7 +173,7 @@ const AstrologyForm = ({ setResult, setSummaryText }) => {
 
         <div>
           <label className="block font-semibold mb-1">
-            Time of Birth ⏰ (HH:MM:SS):
+            {translate('Time of Birth ⏰ (HH:MM:SS):', language)}
           </label>
           <input
             type="time"
@@ -179,7 +186,7 @@ const AstrologyForm = ({ setResult, setSummaryText }) => {
         </div>
 
         <div>
-          <label className="block font-semibold mb-1">City 🏙:</label>
+          <label className="block font-semibold mb-1">{translate('City 🏙:', language)}</label>
           <input
             type="text"
             value={city}
@@ -189,7 +196,7 @@ const AstrologyForm = ({ setResult, setSummaryText }) => {
           />
           {coordinates.lat && coordinates.lng && (
             <div id="latlng" className="mt-2 text-sm text-gray-600">
-              📍 Coordinates: {coordinates.lat}, {coordinates.lng}
+              📍 {translate('Coordinates:', language)} {coordinates.lat}, {coordinates.lng}
             </div>
           )}
           {citySuggestions.length > 0 && (
@@ -213,7 +220,7 @@ const AstrologyForm = ({ setResult, setSummaryText }) => {
         </div>
 
         <div>
-          <label className="block font-semibold mb-1">State 🌆:</label>
+          <label className="block font-semibold mb-1">{translate('State 🌆:', language)}</label>
           <input
             type="text"
             value={state}
@@ -227,7 +234,7 @@ const AstrologyForm = ({ setResult, setSummaryText }) => {
           type="submit"
           className="w-full bg-teal-600 text-white py-2 rounded-lg shadow-lg hover:bg-teal-700"
         >
-          {isLoading ? "Calculating..." : "🌟 Get Analysis"}
+          {isLoading ? translate('Calculating...', language) : translate('🌟 Get Analysis', language)}
         </button>
       </form>
     </div>

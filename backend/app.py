@@ -15,16 +15,21 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 app = Flask(__name__)
-# Configure CORS properly
-CORS(app, origins=["http://localhost:5173", "http://127.0.0.1:5173"],
-     methods=["GET", "POST", "OPTIONS"],
-     allow_headers=["Content-Type", "Accept"],
-     max_age=3600)
 
-@app.route('/', methods=['OPTIONS'])
-def handle_options():
-    response = app.make_default_options_response()
-    return response
+# Configure CORS properly with more comprehensive settings
+CORS(app, 
+     origins=[
+         "http://localhost:5173", 
+         "http://localhost:5174", 
+         "http://127.0.0.1:5173", 
+         "http://127.0.0.1:5174",
+         "http://127.0.0.1:5001",
+         "http://localhost:5001"
+     ],
+     methods=["GET", "POST", "OPTIONS"],
+     allow_headers=["Content-Type", "Accept", "Authorization", "X-Requested-With"],
+     expose_headers=["Content-Type"],
+     max_age=3600)
 
 def get_coordinates(city, state):
     """
@@ -238,14 +243,20 @@ class VedicKundali:
 @app.route("/", methods=["POST", "OPTIONS"])
 @app.route("/calculate", methods=["POST", "OPTIONS"])
 def calculate_kundali():
-    if request.method == "OPTIONS":
-        response = app.make_default_options_response()
-        response.headers.add('Access-Control-Allow-Methods', 'POST, OPTIONS')
-        response.headers.add('Access-Control-Allow-Headers', 'Content-Type, Authorization')
-        return response
-
     try:
-        data = request.json
+        # Handle OPTIONS preflight request for CORS
+        if request.method == "OPTIONS":
+            logger.info("Handling CORS preflight request")
+            return '', 200
+        
+        # Parse JSON data
+        try:
+            data = request.json
+            logger.info(f"Received data: {data}")
+        except Exception as e:
+            logger.error(f"JSON parsing error: {str(e)}")
+            return jsonify({"error": f"Invalid JSON: {str(e)}"}), 400
+            
         name = data.get("name")
         city = data.get("city")
         state = data.get("state")

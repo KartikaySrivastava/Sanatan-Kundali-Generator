@@ -1,6 +1,14 @@
 import React from "react";
+import {jsPDF} from "jspdf";
+import html2canvas from "html2canvas";
+import { useLanguage } from "../contexts/LanguageContext";
+import { translate } from "../translations/translations";
+import { translateRashi, translatePlanet } from "../utils/astrologyTranslations";
+import LanguageToggle from "./LanguageToggle";
 
 const AstroChart = ({ result, summaryText }) => {
+  const { language, isHindi } = useLanguage();
+  
   if (!result) return null;
 
   // Safe data extraction with fallbacks
@@ -18,6 +26,11 @@ const AstroChart = ({ result, summaryText }) => {
     'Saturn': 'Sa',
     'Rahu': 'Ra',
     'Ketu': 'Ke'
+  };
+
+  // Translate planet names
+  const translatePlanet = (planetName) => {
+    return translate(planetName, language, planetName);
   };
 
   // Planet colors matching AstroSage
@@ -92,19 +105,29 @@ const AstroChart = ({ result, summaryText }) => {
       // Get planet data from the planets section
       const planetData = planetsData[planet] || {};
       
+      // Translate strengths
+      const translatedStrengths = (strengths[planet] || ['General Influence']).map(strength => 
+        translate(strength, language, strength)
+      );
+      
+      // Translate house matters text
+      const houseNumber = houseData.house ? ['1st', '2nd', '3rd', '4th', '5th', '6th', '7th', '8th', '9th', '10th', '11th', '12th'][houseData.house - 1] : 'Unknown';
+      const translatedHouseNumber = translate(houseNumber, language, houseNumber);
+      
+      // Translate other terms
+      const rulingText = `${translate('Ruling', language, 'Ruling')} ${translatedHouseNumber} ${translate('house matters', language, 'house matters')}`;
+      const governsText = `${translate('Governs', language, 'Governs')} ${translateRashi(planetData.rashi || 'unknown sign', language)} ${translate('characteristics', language, 'characteristics')}`;
+      const positionText = `${translate('Position:', language, 'Position:')} ${planetData.degrees || 'N/A'} ${translate('degrees', language, 'degrees')}`;
+      
       return {
         planet,
         code: planetCode,
         color: planetColors[planetCode] || '#2C3E50',
         house: houseData.house || 'N/A',
-        rashi: planetData.rashi || 'Unknown',
+        rashi: translateRashi(planetData.rashi || 'Unknown', language),
         degrees: planetData.degrees || 'N/A',
-        strengths: strengths[planet] || ['General Influence'],
-        significances: [
-          `Ruling ${houseData.house ? ['1st', '2nd', '3rd', '4th', '5th', '6th', '7th', '8th', '9th', '10th', '11th', '12th'][houseData.house - 1] : 'Unknown'} house matters`,
-          `Governs ${planetData.rashi || 'unknown sign'} characteristics`,
-          `Position: ${planetData.degrees || 'N/A'} degrees`
-        ]
+        strengths: translatedStrengths,
+        significances: [rulingText, governsText, positionText]
       };
     });
   };
@@ -127,27 +150,209 @@ const AstroChart = ({ result, summaryText }) => {
     
     return Object.entries(houseCoordinates).map(([house, coords]) => ({
       house: parseInt(house),
-      rashi: houseRashis[house] || 'Unknown',
-      meaning: houseMeanings[house] || 'General Life Matters',
+      rashi: translateRashi(houseRashis[house] || 'Unknown'),
+      meaning: translate(houseMeanings[house] || 'General Life Matters', language, houseMeanings[house] || 'General Life Matters'),
       planets: planetHouseMapping[house] || [],
-      strength: planetHouseMapping[house]?.length > 0 ? 'Strong' : 'Neutral',
-      influence: planetHouseMapping[house]?.length > 1 ? 'Multiple Planetary Influence' : 'Single Planetary Influence'
+      strength: translate(planetHouseMapping[house]?.length > 0 ? 'Strong' : 'Neutral', language, planetHouseMapping[house]?.length > 0 ? 'Strong' : 'Neutral'),
+      influence: translate(planetHouseMapping[house]?.length > 1 ? 'Multiple Planetary Influence' : 'Single Planetary Influence', language, planetHouseMapping[house]?.length > 1 ? 'Multiple Planetary Influence' : 'Single Planetary Influence')
     }));
   };
 
   const planetAnalysisData = generatePlanetAnalysisTable();
   const houseAnalysisData = generateHouseAnalysisTable();
 
+  const downloadPDF = async () => {
+    // Capture the entire report (chart + analysis) for comprehensive PDF
+    const completeReportElement = document.getElementById('complete-report-section');
+    const analysisElement = document.getElementById('analysis-section');
+    
+    if (!completeReportElement) return;
+
+    try {
+      // Show loading state
+      const loadingText = document.createElement('div');
+      loadingText.innerHTML = 'Generating PDF...';
+      loadingText.style.position = 'fixed';
+      loadingText.style.top = '50%';
+      loadingText.style.left = '50%';
+      loadingText.style.transform = 'translate(-50%, -50%)';
+      loadingText.style.backgroundColor = '#4F46E5';
+      loadingText.style.color = 'white';
+      loadingText.style.padding = '20px';
+      loadingText.style.borderRadius = '8px';
+      loadingText.style.zIndex = '10000';
+      loadingText.style.fontSize = '18px';
+      loadingText.style.fontWeight = 'bold';
+      document.body.appendChild(loadingText);
+
+      // Create a temporary container to combine chart, analysis, and text summary for PDF
+      const tempContainer = document.createElement('div');
+      tempContainer.style.position = 'absolute';
+      tempContainer.style.left = '-9999px';
+      tempContainer.style.top = '0';
+      tempContainer.style.width = '1200px';
+      tempContainer.style.backgroundColor = '#ffffff';
+      tempContainer.style.padding = '20px';
+      tempContainer.style.fontFamily = 'Arial, sans-serif';
+      
+      // Clone chart section
+      const chartClone = completeReportElement.cloneNode(true);
+      tempContainer.appendChild(chartClone);
+      
+      // Add text summary if available
+      if (summaryText) {
+        const summaryDiv = document.createElement('div');
+        summaryDiv.style.marginTop = '30px';
+        summaryDiv.style.padding = '20px';
+        summaryDiv.style.backgroundColor = '#f8f9fa';
+        summaryDiv.style.border = '1px solid #dee2e6';
+        summaryDiv.style.borderRadius = '8px';
+        
+        const summaryTitle = document.createElement('h2');
+        summaryTitle.textContent = 'Comprehensive Analysis Summary';
+        summaryTitle.style.color = '#2c3e50';
+        summaryTitle.style.marginBottom = '15px';
+        summaryTitle.style.fontSize = '18px';
+        summaryTitle.style.fontWeight = 'bold';
+        
+        const summaryContent = document.createElement('pre');
+        summaryContent.textContent = summaryText;
+        
+        // If in Hindi mode, try to translate common Rashi names in summary
+        if (isHindi && summaryText) {
+          let translatedSummary = summaryText;
+          // Translate common Rashi names in the summary
+          Object.entries(planetCodes).forEach(([englishName, code]) => {
+            const hindiName = translate(englishName, language, englishName);
+            if (hindiName !== englishName) {
+              const regex = new RegExp(`\\b${englishName}\\b`, 'gi');
+              translatedSummary = translatedSummary.replace(regex, hindiName);
+            }
+          });
+          summaryContent.textContent = translatedSummary;
+        }
+        summaryContent.style.whiteSpace = 'pre-wrap';
+        summaryContent.style.fontFamily = 'monospace';
+        summaryContent.style.fontSize = '12px';
+        summaryContent.style.lineHeight = '1.4';
+        summaryContent.style.color = '#34495e';
+        
+        summaryDiv.appendChild(summaryTitle);
+        summaryDiv.appendChild(summaryContent);
+        tempContainer.appendChild(summaryDiv);
+      }
+      
+      // Clone analysis section if available
+      const analysisClone = analysisElement ? analysisElement.cloneNode(true) : null;
+      if (analysisClone) {
+        tempContainer.appendChild(analysisClone);
+      }
+      
+      document.body.appendChild(tempContainer);
+      
+      // Capture the combined content as canvas
+      const canvas = await html2canvas(tempContainer, {
+        scale: 1.5,
+        useCORS: true,
+        allowTaint: true,
+        backgroundColor: '#ffffff',
+        width: 1200,
+        height: tempContainer.scrollHeight
+      });
+      
+      // Clean up temporary container
+      document.body.removeChild(tempContainer);
+
+      // Create PDF
+      const imgData = canvas.toDataURL('image/png');
+      const pdf = new jsPDF('p', 'mm', 'a4');
+      
+      // Calculate dimensions to fit on A4
+      const imgWidth = 210; // A4 width in mm
+      const pageHeight = 297; // A4 height in mm
+      const imgHeight = (canvas.height * imgWidth) / canvas.width;
+      let heightLeft = imgHeight;
+
+      let position = 0;
+
+      // Add title page
+      pdf.setFontSize(20);
+      pdf.setTextColor(76, 77, 79);
+      pdf.text('Astrological Chart Report', 105, 30, { align: 'center' });
+      
+      pdf.setFontSize(12);
+      pdf.text(`Generated on: ${new Date().toLocaleDateString()}`, 105, 45, { align: 'center' });
+      
+      if (result.name) {
+        pdf.text(`Name: ${result.name}`, 105, 55, { align: 'center' });
+      }
+      if (result.birth_date) {
+        pdf.text(`Birth Date: ${result.birth_date}`, 105, 65, { align: 'center' });
+      }
+      if (result.birth_time) {
+        pdf.text(`Birth Time: ${result.birth_time}`, 105, 75, { align: 'center' });
+      }
+      if (result.birth_place) {
+        pdf.text(`Birth Place: ${result.birth_place}`, 105, 85, { align: 'center' });
+      }
+
+      // Add new page for chart
+      pdf.addPage();
+      position = 0;
+
+      // Add the chart image
+      pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+      heightLeft -= pageHeight;
+
+      // Add remaining pages if content is longer than one page
+      while (heightLeft >= 0) {
+        position = heightLeft - imgHeight;
+        pdf.addPage();
+        pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+        heightLeft -= pageHeight;
+      }
+
+      // Save the PDF
+      const fileName = `complete-astrology-report-${result.name || 'report'}-${new Date().toISOString().split('T')[0]}.pdf`;
+      pdf.save(fileName);
+
+      // Remove loading text
+      document.body.removeChild(loadingText);
+
+    } catch (error) {
+      console.error('Error generating PDF:', error);
+      alert('Error generating PDF. Please try again.');
+      // Remove loading text if it exists
+      const loadingText = document.querySelector('[innerHTML="Generating PDF..."]');
+      if (loadingText) {
+        document.body.removeChild(loadingText);
+      }
+    }
+  };
+
   return (
     <div className="w-full">
+      {/* Language Toggle and Download PDF Button */}
+      <div className="flex justify-center items-center gap-4 mb-6">
+        <LanguageToggle />
+        <button
+          onClick={downloadPDF}
+          className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-bold py-3 px-6 rounded-lg shadow-lg transform transition-all duration-200 hover:scale-105 flex items-center gap-2"
+        >
+          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+          </svg>
+          {translate('Download PDF Report', language)}
+        </button>
+      </div>
       {/* Chart Container - Centered and Large */}
       <div className="flex justify-center mb-8">
-        <div className="w-full max-w-5xl bg-white rounded-xl shadow-xl p-8 border-2 border-blue-200">
+        <div id="complete-report-section" className="w-full max-w-5xl bg-white rounded-xl shadow-xl p-8 border-2 border-blue-200">
           <div className="flex flex-col lg:flex-row gap-8 justify-center">
             {/* Lagna Chart (D1) */}
             <div className="flex-1">
               <div className="text-center mb-4">
-                <h3 className="text-xl font-bold text-gray-800">Lagna Chart (D1)</h3>
+                <h3 className="text-xl font-bold text-gray-800">{translate('Lagna Chart (D1)', language)}</h3>
               </div>
               <svg 
                 viewBox="0 0 200 200" 
@@ -188,7 +393,7 @@ const AstroChart = ({ result, summaryText }) => {
                       fill="#2980B9"
                       fontWeight="600"
                     >
-                      {houseRashis[house] || 'Unknown'}
+                      {translateRashi(houseRashis[house] || 'Unknown')}
                     </text>
 
                     {/* Planet Names with degrees */}
@@ -224,7 +429,7 @@ const AstroChart = ({ result, summaryText }) => {
             {/* Navamsa Chart (D9) */}
             <div className="flex-1">
               <div className="text-center mb-4">
-                <h3 className="text-xl font-bold text-gray-800">Navamsa (D9)</h3>
+                <h3 className="text-xl font-bold text-gray-800">{translate('Navamsa (D9)', language)}</h3>
               </div>
               <svg 
                 viewBox="0 0 200 200" 
@@ -243,7 +448,7 @@ const AstroChart = ({ result, summaryText }) => {
 
                 {/* Display Navamsa data if available */}
                 {Object.entries(houseCoordinates).map(([house, { x, y }]) => {
-                  const navamsaRashi = result.navamsa_houses?.[house] || houseRashis[house] || 'Unknown';
+                  const navamsaRashi = translateRashi(result.navamsa_houses?.[house] || houseRashis[house] || 'Unknown');
                   return (
                     <g key={`navamsa-${house}`}>
                       {/* House Number */}
@@ -279,27 +484,27 @@ const AstroChart = ({ result, summaryText }) => {
       </div>
 
       {/* Enhanced Analysis Tables - Below Chart */}
-      <div className="w-full mt-12">
+      <div className="w-full mt-12" id="analysis-section">
         <div className="text-center mb-8">
-          <h2 className="text-3xl font-bold text-gray-800 mb-4">Comprehensive Astrological Analysis</h2>
-          <p className="text-gray-600">Detailed breakdown of planetary positions and their influences</p>
+          <h2 className="text-3xl font-bold text-gray-800 mb-4">{translate('Comprehensive Astrological Analysis', language)}</h2>
+          <p className="text-gray-600">{translate('Detailed breakdown of planetary positions and their influences', language)}</p>
         </div>
 
         {/* Detailed Planet Analysis Table */}
         <div className="mb-16 bg-white rounded-xl shadow-lg border-2 border-gray-300 overflow-hidden">
           <div className="bg-gradient-to-r from-purple-600 to-indigo-600 px-6 py-8">
-            <p className="text-purple-100 text-xl font-bold px-4 py-2 my-4">Complete planetary positions, strengths, and significances</p>
+            <p className="text-purple-100 text-xl font-bold px-4 py-2 my-4">{translate('Complete planetary positions, strengths, and significances', language)}</p>
           </div>
           <div className="overflow-x-auto">
             <table className="w-full border-collapse">
               <thead className="bg-gray-100">
                 <tr>
-                  <th className="px-6 py-4 text-left text-sm font-bold text-gray-800 uppercase tracking-wider border border-gray-400">Planet</th>
-                  <th className="px-6 py-4 text-left text-sm font-bold text-gray-800 uppercase tracking-wider border border-gray-400">Position</th>
-                  <th className="px-6 py-4 text-left text-sm font-bold text-gray-800 uppercase tracking-wider border border-gray-400">Rashi</th>
-                  <th className="px-6 py-4 text-left text-sm font-bold text-gray-800 uppercase tracking-wider border border-gray-400">Degrees</th>
-                  <th className="px-6 py-4 text-left text-sm font-bold text-gray-800 uppercase tracking-wider border border-gray-400">Key Strengths</th>
-                  <th className="px-6 py-4 text-left text-sm font-bold text-gray-800 uppercase tracking-wider border border-gray-400">Significances</th>
+                  <th className="px-6 py-4 text-left text-sm font-bold text-gray-800 uppercase tracking-wider border border-gray-400">{translate('Planet', language)}</th>
+                  <th className="px-6 py-4 text-left text-sm font-bold text-gray-800 uppercase tracking-wider border border-gray-400">{translate('Position', language)}</th>
+                  <th className="px-6 py-4 text-left text-sm font-bold text-gray-800 uppercase tracking-wider border border-gray-400">{translate('Rashi', language)}</th>
+                  <th className="px-6 py-4 text-left text-sm font-bold text-gray-800 uppercase tracking-wider border border-gray-400">{translate('Degrees', language)}</th>
+                  <th className="px-6 py-4 text-left text-sm font-bold text-gray-800 uppercase tracking-wider border border-gray-400">{translate('Key Strengths', language)}</th>
+                  <th className="px-6 py-4 text-left text-sm font-bold text-gray-800 uppercase tracking-wider border border-gray-400">{translate('Significances', language)}</th>
                 </tr>
               </thead>
               <tbody className="bg-white">
@@ -312,16 +517,16 @@ const AstroChart = ({ result, summaryText }) => {
                           style={{ backgroundColor: planetData.color }}
                         ></div>
                         <div>
-                          <div className="text-base font-medium text-gray-900">{planetData.planet}</div>
+                          <div className="text-base font-medium text-gray-900">{translatePlanet(planetData.planet)}</div>
                           <div className="text-sm text-gray-500">({planetData.code})</div>
                         </div>
                       </div>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-base text-gray-900 border border-gray-400">
-                      House {planetData.house}
+                      {translate('House', language)} {planetData.house}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-base text-gray-900 border border-gray-400">
-                      {planetData.rashi}
+                      {translateRashi(planetData.rashi || 'Unknown', language)}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-base text-gray-900 border border-gray-400">
                       {typeof planetData.degrees === 'number' ? `${planetData.degrees.toFixed(1)}°` : planetData.degrees}
@@ -352,28 +557,28 @@ const AstroChart = ({ result, summaryText }) => {
         {/* House Analysis Table */}
         <div className="mb-16 bg-white rounded-xl shadow-lg border-2 border-gray-300 overflow-hidden">
           <div className="bg-gradient-to-r from-emerald-600 to-teal-600 px-6 py-8">
-            <p className="text-emerald-100 text-xl font-bold px-4 py-2 my-4">Lunar house meanings and planetary influences</p>
+            <p className="text-emerald-100 text-xl font-bold px-4 py-2 my-4">{translate('Lunar house meanings and planetary influences', language)}</p>
           </div>
           <div className="overflow-x-auto">
             <table className="w-full border-collapse">
               <thead className="bg-gray-100">
                 <tr>
-                  <th className="px-6 py-4 text-left text-sm font-bold text-gray-800 uppercase tracking-wider border border-gray-400">House</th>
-                  <th className="px-6 py-4 text-left text-sm font-bold text-gray-800 uppercase tracking-wider border border-gray-400">Rashi</th>
-                  <th className="px-6 py-4 text-left text-sm font-bold text-gray-800 uppercase tracking-wider border border-gray-400">Meaning</th>
-                  <th className="px-6 py-4 text-left text-sm font-bold text-gray-800 uppercase tracking-wider border border-gray-400">Planets</th>
-                  <th className="px-6 py-4 text-left text-sm font-bold text-gray-800 uppercase tracking-wider border border-gray-400">Influence</th>
-                  <th className="px-6 py-4 text-left text-sm font-bold text-gray-800 uppercase tracking-wider border border-gray-400">Strength</th>
+                  <th className="px-6 py-4 text-left text-sm font-bold text-gray-800 uppercase tracking-wider border border-gray-400">{translate('House', language)}</th>
+                  <th className="px-6 py-4 text-left text-sm font-bold text-gray-800 uppercase tracking-wider border border-gray-400">{translate('Rashi', language)}</th>
+                  <th className="px-6 py-4 text-left text-sm font-bold text-gray-800 uppercase tracking-wider border border-gray-400">{translate('Meaning', language)}</th>
+                  <th className="px-6 py-4 text-left text-sm font-bold text-gray-800 uppercase tracking-wider border border-gray-400">{translate('Planets', language)}</th>
+                  <th className="px-6 py-4 text-left text-sm font-bold text-gray-800 uppercase tracking-wider border border-gray-400">{translate('Influence', language)}</th>
+                  <th className="px-6 py-4 text-left text-sm font-bold text-gray-800 uppercase tracking-wider border border-gray-400">{translate('Strength', language)}</th>
                 </tr>
               </thead>
               <tbody className="bg-white">
                 {houseAnalysisData.map((houseData, index) => (
                   <tr key={houseData.house} className={index % 2 === 0 ? 'bg-gray-50' : 'bg-white'}>
                     <td className="px-6 py-4 whitespace-nowrap border border-gray-400">
-                      <div className="text-base font-bold text-gray-900">House {houseData.house}</div>
+                      <div className="text-base font-bold text-gray-900">{translate('House', language)} {houseData.house}</div>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-base text-gray-900 border border-gray-400">
-                      {houseData.rashi}
+                      {translateRashi(houseData.rashi || 'Unknown', language)}
                     </td>
                     <td className="px-6 py-4 text-base text-gray-900 border border-gray-400">
                       <div className="max-w-xs">{houseData.meaning}</div>
@@ -395,7 +600,7 @@ const AstroChart = ({ result, summaryText }) => {
                           })}
                         </div>
                       ) : (
-                        <span className="text-gray-400">No planets</span>
+                        <span className="text-gray-400">{translate('No planets', language)}</span>
                       )}
                     </td>
                     <td className="px-6 py-4 text-base text-gray-900 border border-gray-400">
@@ -418,13 +623,13 @@ const AstroChart = ({ result, summaryText }) => {
         {/* Quick Reference Table */}
         <div className="mt-16 bg-white rounded-xl shadow-lg border-2 border-gray-300 overflow-hidden">
           <div className="bg-gradient-to-r from-amber-600 to-orange-600 px-6 py-8">
-            <p className="text-black text-xl font-bold px-4 py-2 my-4">Essential astrological information at a glance</p>
+            <p className="text-black text-xl font-bold px-4 py-2 my-4">{translate('Essential astrological information at a glance', language)}</p>
           </div>
           <div className="p-6">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {/* Planet Quick Info */}
               <div>
-                <h4 className="text-lg font-semibold text-gray-800 mb-3">Planets & Their Meanings</h4>
+                <h4 className="text-lg font-semibold text-gray-800 mb-3">{translate('Planets & Their Meanings', language)}</h4>
                 <div className="space-y-2">
                   {Object.entries(planetCodes).map(([fullName, code]) => (
                     <div key={fullName} className="flex items-center space-x-2">
@@ -432,7 +637,7 @@ const AstroChart = ({ result, summaryText }) => {
                         className="w-3 h-3 rounded-full"
                         style={{ backgroundColor: planetColors[code] || '#2C3E50' }}
                       ></div>
-                      <span className="text-sm text-gray-700">{fullName} ({code})</span>
+                      <span className="text-sm text-gray-700">{translatePlanet(fullName)} ({code})</span>
                     </div>
                   ))}
                 </div>
@@ -440,23 +645,23 @@ const AstroChart = ({ result, summaryText }) => {
 
               {/* House Categories */}
               <div>
-                <h4 className="text-lg font-semibold text-gray-800 mb-3">House Categories</h4>
+                <h4 className="text-lg font-semibold text-gray-800 mb-3">{translate('House Categories', language)}</h4>
                 <div className="space-y-2 text-sm text-gray-700">
-                  <div><strong>Kendra (1,4,7,10):</strong> Cardinal houses - Personal growth</div>
-                  <div><strong>Trikona (1,5,9):</strong> Trinal houses - Dharma & purpose</div>
-                  <div><strong>Dusthana (6,8,12):</strong> Dust houses - Challenges & obstacles</div>
-                  <div><strong>Upachaya (3,6,10,11):</strong> Growing houses - Improvement</div>
+                  <div><strong>{translate('Kendra (1,4,7,10):', language)}</strong> {translate('Cardinal houses - Personal growth', language)}</div>
+                  <div><strong>{translate('Trikona (1,5,9):', language)}</strong> {translate('Trinal houses - Dharma & purpose', language)}</div>
+                  <div><strong>{translate('Dusthana (6,8,12):', language)}</strong> {translate('Dust houses - Challenges & obstacles', language)}</div>
+                  <div><strong>{translate('Upachaya (3,6,10,11):', language)}</strong> {translate('Growing houses - Improvement', language)}</div>
                 </div>
               </div>
 
               {/* Planetary Strength */}
               <div>
-                <h4 className="text-lg font-semibold text-gray-800 mb-3">Strength Indicators</h4>
+                <h4 className="text-lg font-semibold text-gray-800 mb-3">{translate('Strength Indicators', language)}</h4>
                 <div className="space-y-2 text-sm text-gray-700">
-                  <div><strong>Exaltation:</strong> Peak strength - Maximum positive influence</div>
-                  <div><strong>Moolatrikona:</strong> Own sign - Strong natural position</div>
-                  <div><strong>Swakshetra:</strong> Own house - Good strength</div>
-                  <div><strong>Neecha:</strong> Debilitated - Weak position</div>
+                  <div><strong>{translate('Exaltation:', language)}</strong> {translate('Peak strength - Maximum positive influence', language)}</div>
+                  <div><strong>{translate('Moolatrikona:', language)}</strong> {translate('Own sign - Strong natural position', language)}</div>
+                  <div><strong>{translate('Swakshetra:', language)}</strong> {translate('Own house - Good strength', language)}</div>
+                  <div><strong>{translate('Neecha:', language)}</strong> {translate('Debilitated - Weak position', language)}</div>
                 </div>
               </div>
             </div>

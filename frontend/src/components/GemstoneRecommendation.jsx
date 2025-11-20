@@ -1,23 +1,34 @@
 
 import React, { useState } from "react";
+import { useLanguage } from "../contexts/LanguageContext";
+import { translateRashi } from "../utils/astrologyTranslations";
 
 const GemstoneRecommendation = () => {
+  const { language, isHindi } = useLanguage();
   const [selectedRashi, setSelectedRashi] = useState("");
 
   const rashis = [
-    { name: "Aries (मेष)", value: "aries" },
-    { name: "Taurus (वृषभ)", value: "taurus" },
-    { name: "Gemini (मिथुन)", value: "gemini" },
-    { name: "Cancer (कर्क)", value: "cancer" },
-    { name: "Leo (सिंह)", value: "leo" },
-    { name: "Virgo (कन्या)", value: "virgo" },
-    { name: "Libra (तुला)", value: "libra" },
-    { name: "Scorpio (वृश्चिक)", value: "scorpio" },
-    { name: "Sagittarius (धनु)", value: "sagittarius" },
-    { name: "Capricorn (मकर)", value: "capricorn" },
-    { name: "Aquarius (कुंभ)", value: "aquarius" },
-    { name: "Pisces (मीन)", value: "pisces" },
+    { name: "Aries", value: "aries" },
+    { name: "Taurus", value: "taurus" },
+    { name: "Gemini", value: "gemini" },
+    { name: "Cancer", value: "cancer" },
+    { name: "Leo", value: "leo" },
+    { name: "Virgo", value: "virgo" },
+    { name: "Libra", value: "libra" },
+    { name: "Scorpio", value: "scorpio" },
+    { name: "Sagittarius", value: "sagittarius" },
+    { name: "Capricorn", value: "capricorn" },
+    { name: "Aquarius", value: "aquarius" },
+    { name: "Pisces", value: "pisces" },
   ];
+
+  const getDisplayName = (rashiName) => {
+    const translatedRashi = translateRashi(rashiName, language);
+    if (isHindi) {
+      return `${translatedRashi} (${translatedRashi})`;
+    }
+    return `${rashiName} (${translatedRashi})`;
+  };
 
   const gemstoneDetails = {
     aries: {
@@ -116,7 +127,7 @@ const GemstoneRecommendation = () => {
           <option value="">Select Rashi</option>
           {rashis.map((rashi) => (
             <option key={rashi.value} value={rashi.value}>
-              {rashi.name}
+              {getDisplayName(rashi.name)}
             </option>
           ))}
         </select>
@@ -125,7 +136,7 @@ const GemstoneRecommendation = () => {
         <div className="p-6">
           <h2 className="text-2xl font-semibold text-teal-800 mb-4 text-center">
             {selectedRashi
-              ? rashis.find((r) => r.value === selectedRashi).name
+              ? getDisplayName(rashis.find((r) => r.value === selectedRashi).name)
               : "Welcome"}
           </h2>
           <div className="bg-teal-50 p-4 rounded-lg">

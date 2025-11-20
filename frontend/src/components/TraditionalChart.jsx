@@ -1,7 +1,11 @@
 
 import React from "react";
+import { useLanguage } from "../contexts/LanguageContext";
+import { translateRashi } from "../utils/astrologyTranslations";
 
 const TraditionalChart = ({ result }) => {
+  const { language } = useLanguage();
+  
   if (!result) return null;
 
   const houseRashis = result.house_rashis; // Rashi names for each house
@@ -52,7 +56,7 @@ const TraditionalChart = ({ result }) => {
             fontSize="2" // Smaller font size for Rashi name
             fill="blue"
           >
-            {houseRashis[house]}
+            {translateRashi(houseRashis[house] || 'Unknown', language)}
           </text>
 
           {/* Planet Names (Large Text) */}

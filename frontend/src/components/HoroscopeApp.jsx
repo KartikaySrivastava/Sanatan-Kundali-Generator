@@ -1,5 +1,7 @@
 
 import React, { useState } from 'react';
+import { useLanguage } from "../contexts/LanguageContext";
+import { translateRashi } from "../utils/astrologyTranslations";
 // import aries from "../assets/aries.webp";
 // import taurus from "../assets/taurus.webp";
 // import gemini from "../assets/gemini.webp";
@@ -15,8 +17,16 @@ import React, { useState } from 'react';
 
 
 const HoroscopeApp = () => {
+  const { language, isHindi } = useLanguage();
   const [selectedRashi, setSelectedRashi] = useState('');
   const [horoscopeType, setHoroscopeType] = useState('daily');
+
+  const getDisplayName = (rashiName) => {
+    if (isHindi) {
+      return translateRashi(rashiName, language);
+    }
+    return rashiName;
+  };
 
   const rashis = [
     { name: 'Aries', value: 'aries', logo: "" },
@@ -206,7 +216,7 @@ const HoroscopeApp = () => {
           <option value="">Select Rashi</option>
           {rashis.map((rashi) => (
             <option key={rashi.value} value={rashi.value}>
-              {rashi.name}
+              {getDisplayName(rashi.name)}
             </option>
           ))}
         </select>

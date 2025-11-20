@@ -1,7 +1,10 @@
 
 import React, { useState } from "react";
+import { useLanguage } from "../contexts/LanguageContext";
+import { translateRashi } from "../utils/astrologyTranslations";
 
 const Meditation = () => {
+  const { language, isHindi } = useLanguage();
   const [selectedRashi, setSelectedRashi] = useState("");
 
   const rashis = [
@@ -18,6 +21,13 @@ const Meditation = () => {
     { name: "Aquarius", value: "aquarius" },
     { name: "Pisces", value: "pisces" },
   ];
+
+  const getDisplayName = (rashiName) => {
+    if (isHindi) {
+      return translateRashi(rashiName, language);
+    }
+    return rashiName;
+  };
 
   const rashiDetails = {
     aries: {
@@ -102,7 +112,7 @@ const Meditation = () => {
           <option value="">Select Rashi</option>
           {rashis.map((rashi) => (
             <option key={rashi.value} value={rashi.value}>
-              {rashi.name}
+              {getDisplayName(rashi.name)}
             </option>
           ))}
         </select>
@@ -110,7 +120,7 @@ const Meditation = () => {
       <div className="max-w-lg w-full bg-gradient-to-br from-white to-blue-100 shadow-lg rounded-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
         <div className="p-6">
           <h2 className="text-2xl font-semibold text-blue-800 mb-4 text-center">
-            {selectedRashi ? rashis.find((r) => r.value === selectedRashi).name : "Welcome"}
+            {selectedRashi ? getDisplayName(rashis.find((r) => r.value === selectedRashi).name) : "Welcome"}
           </h2>
           <div className="bg-blue-50 p-4 rounded-lg">
             <p className="mb-4">
