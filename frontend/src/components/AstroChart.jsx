@@ -354,9 +354,9 @@ const AstroChart = ({ result, summaryText }) => {
               <div className="text-center mb-4">
                 <h3 className="text-xl font-bold text-gray-800">{translate('Lagna Chart (D1)', language)}</h3>
               </div>
-              <svg 
-                viewBox="0 0 200 200" 
-                className="w-full h-auto max-w-lg mx-auto" 
+              <svg
+                viewBox="0 0 200 200"
+                className="w-[300px] h-[300px] mx-auto"
                 style={{ aspectRatio: "1" }}
               >
                 {/* Outer Square */}
@@ -431,9 +431,9 @@ const AstroChart = ({ result, summaryText }) => {
               <div className="text-center mb-4">
                 <h3 className="text-xl font-bold text-gray-800">{translate('Navamsa (D9)', language)}</h3>
               </div>
-              <svg 
-                viewBox="0 0 200 200" 
-                className="w-full h-auto max-w-lg mx-auto"
+              <svg
+                viewBox="0 0 200 200"
+                className="w-[300px] h-[300px] mx-auto"
                 style={{ aspectRatio: "1" }}
               >
                 {/* Outer Square */}

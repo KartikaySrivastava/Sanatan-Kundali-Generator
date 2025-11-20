@@ -6,7 +6,7 @@ export const translateRashi = (rashiName, language = 'en') => {
   const rashiMap = {
     // English to Hindi
     'aries': 'मेष',
-    'taurus': 'वृषभ', 
+    'taurus': 'वृषभ',
     'gemini': 'मिथुन',
     'cancer': 'कर्क',
     'leo': 'सिंह',
@@ -17,10 +17,10 @@ export const translateRashi = (rashiName, language = 'en') => {
     'capricorn': 'मकर',
     'aquarius': 'कुम्भ',
     'pisces': 'मीन',
-    
+
     // Proper case English to Hindi
     'Aries': 'मेष',
-    'Taurus': 'वृषभ', 
+    'Taurus': 'वृषभ',
     'Gemini': 'मिथुन',
     'Cancer': 'कर्क',
     'Leo': 'सिंह',
@@ -31,7 +31,21 @@ export const translateRashi = (rashiName, language = 'en') => {
     'Capricorn': 'मकर',
     'Aquarius': 'कुम्भ',
     'Pisces': 'मीन',
-    
+
+    // Sanskrit names from backend to Hindi
+    'Mesha': 'मेष',
+    'Vrishabha': 'वृषभ',
+    'Mithuna': 'मिथुन',
+    'Karka': 'कर्क',
+    'Simha': 'सिंह',
+    'Kanya': 'कन्या',
+    'Tula': 'तुला',
+    'Vrishchika': 'वृश्चिक',
+    'Dhanu': 'धनु',
+    'Makara': 'मकर',
+    'Kumbha': 'कुम्भ',
+    'Meena': 'मीन',
+
     // Special cases
     'unknown': 'अज्ञात',
     'Unknown': 'Unknown',
