@@ -750,7 +750,7 @@ const Form = ({ setResult, setSummaryText }) => {
         <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-amber-400 to-orange-500 rounded-full mb-4">
         </div>
         <h2 className="text-3xl font-bold font-serif mb-2" style={{ color: '#E8853D' }}>
-          Generate Your Vedic Horoscope
+          Generate Your Vedic
         </h2>
         <p className="text-amber-700">
           Enter your birth details for personalized predictions
